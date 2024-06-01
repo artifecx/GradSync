@@ -25,7 +25,7 @@ const JobContext = ({ children }) => {
 
     useEffect(() => {
         handleJobFetch(
-            `http://localhost:3000/api/v1/jobs/`
+            `https://grad-sync-frontend.vercel.app/api/v1/jobs/`
         );
     }, []);
     const passing = {
