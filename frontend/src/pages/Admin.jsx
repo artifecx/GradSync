@@ -9,7 +9,7 @@ const Admin = () => {
         queryKey: ["admin_info"],
         queryFn: () =>
             getAllHandler(
-                `https://grad-sync-frontend.vercel.app/api/v1/admin/info`
+                `https://grad-sync-backend.vercel.app/api/v1/admin/info`
             ),
     });
 

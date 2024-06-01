@@ -35,7 +35,7 @@ const EditJob = () => {
         queryKey: ["updateJob"],
         queryFn: () =>
             getSingleHandler(
-                `https://grad-sync-frontend.vercel.app/api/v1/jobs/${id}`
+                `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`
             ),
     });
 
@@ -98,7 +98,7 @@ const EditJob = () => {
         // posting;
         updateJobMutation.mutate({
             body: updateJob,
-            url: `https://grad-sync-frontend.vercel.app/api/v1/jobs/${id}`,
+            url: `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`,
         });
     };
     // const onSubmit = (data) => {

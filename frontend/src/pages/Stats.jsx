@@ -32,7 +32,7 @@ const Stats = () => {
         queryKey: ["stats"],
         queryFn: () =>
             getAllHandler(
-                `https://grad-sync-frontend.vercel.app/api/v1/admin/stats`
+                `https://grad-sync-backend.vercel.app/api/v1/admin/stats`
             ),
     });
 

@@ -30,7 +30,7 @@ const Login = () => {
         // posting
         try {
             const response = await axios.post(
-                "https://grad-sync-frontend.vercel.app/api/v1/auth/login",
+                "https://grad-sync-backend.vercel.app/api/v1/auth/login",
                 data,
                 {
                     withCredentials: true,

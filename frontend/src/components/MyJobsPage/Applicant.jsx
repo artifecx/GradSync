@@ -14,7 +14,7 @@ const Applicant = () => {
         queryKey: ["my-jobs"],
         queryFn: async () => {
             const response = await axios.get(
-                `https://grad-sync-frontend.vercel.app/api/v1/application/applicant-jobs`,
+                `https://grad-sync-backend.vercel.app/api/v1/application/applicant-jobs`,
                 { withCredentials: true }
             );
             return response?.data?.result;

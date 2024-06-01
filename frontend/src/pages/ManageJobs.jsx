@@ -25,7 +25,7 @@ const ManageJobs = () => {
         queryKey: ["my-jobs"],
         queryFn: () =>
             getAllHandler(
-                `https://grad-sync-frontend.vercel.app/api/v1/jobs/my-jobs`
+                `https://grad-sync-backend.vercel.app/api/v1/jobs/my-jobs`
             ),
     });
 
@@ -48,14 +48,14 @@ const ManageJobs = () => {
     const deleteJobHandler = async (id) => {
         try {
             const response = await axios.delete(
-                `https://grad-sync-frontend.vercel.app/api/v1/jobs/${id}`,
+                `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`,
                 { withCredentials: true }
             );
 
             // const updateJobs = jobs?.result?.filter((job) => job._id !== id);
             // setJobs(updateJobs);
             // handleJobFetch(
-            //     `https://grad-sync-frontend.vercel.app/api/v1/jobs?page=1`
+            //     `https://grad-sync-backend.vercel.app/api/v1/jobs?page=1`
             // );
             refetch();
             Swal.fire({

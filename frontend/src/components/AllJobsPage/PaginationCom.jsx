@@ -14,7 +14,7 @@ const PaginationCom = () => {
         // );
         // setItemOffset(newOffset);
         handleJobFetch(
-            `https://grad-sync-frontend.vercel.app/api/v1/jobs?page=${
+            `https://grad-sync-backend.vercel.app/api/v1/jobs?page=${
                 e.selected + 1
             }&limit=5`
         );

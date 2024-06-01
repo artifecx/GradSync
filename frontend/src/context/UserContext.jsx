@@ -12,7 +12,7 @@ const UserContext = ({ children }) => {
         setUserLoading(true);
         try {
             const response = await axios.get(
-                `https://grad-sync-frontend.vercel.app/api/v1/auth/me`,
+                `https://grad-sync-backend.vercel.app/api/v1/auth/me`,
                 { withCredentials: true }
             );
             setUserError({ status: false, message: "" });

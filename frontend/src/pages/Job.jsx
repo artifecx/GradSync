@@ -28,7 +28,7 @@ const Job = () => {
         queryKey: ["job"],
         queryFn: () =>
             getSingleHandler(
-                `https://grad-sync-frontend.vercel.app/api/v1/jobs/${id}`
+                `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`
             ),
     });
 

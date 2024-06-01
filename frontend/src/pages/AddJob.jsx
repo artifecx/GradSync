@@ -55,7 +55,7 @@ const AddJob = () => {
         // posting;
         try {
             const response = await axios.post(
-                "https://grad-sync-frontend.vercel.app/api/v1/jobs",
+                "https://grad-sync-backend.vercel.app/api/v1/jobs",
                 newJob,
                 {
                     withCredentials: true,
