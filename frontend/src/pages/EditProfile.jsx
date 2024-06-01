@@ -198,6 +198,7 @@ const EditProfile = () => {
                             </div>
 
                             {/* Resume */}
+                            {user.role !== "admin" && user.role !== "recruiter" && (
                             <div className="row">
                                 <label htmlFor="resume">Resume Link</label>
                                 <input
@@ -226,7 +227,7 @@ const EditProfile = () => {
                                         {errors?.resume?.message}
                                     </span>
                                 )}
-                            </div>
+                            </div>)}
 
                             {/* Gender */}
                             <div className="row">

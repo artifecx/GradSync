@@ -70,7 +70,7 @@ const Profile = () => {
                             </tr>
                             <tr className="row">
                                 <td className="info">Gender :</td>
-                                <td className="value">Male</td>
+                                <td className="value">{user?.gender}</td>
                             </tr>
                         </tbody>
                     </table>

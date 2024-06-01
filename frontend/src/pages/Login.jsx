@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { useUserContext } from "../context/UserContext";
 
 const Login = () => {
-    const { handleFetchMe } = useUserContext();
+    const { handleFetchMe, user } = useUserContext();
     const {
         register,
         handleSubmit,

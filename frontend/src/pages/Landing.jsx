@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Wrapper from "../assets/css/wrappers/LandingPage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import photo from "../assets/media/LandingPage/hero.png";
 import Navbar from "../components/shared/Navbar";
 import PopularCategory from "../components/Home Page/PopularCategory";
@@ -8,15 +8,26 @@ import HowWorks from "../components/Home Page/HowWorks";
 import Team from "../components/Home Page/Team";
 import Brands from "../components/Home Page/Brands";
 import Testimonial from "../components/Home Page/Testimonial";
+import { useUserContext } from "../context/UserContext";
+import Loading from "../components/shared/Loading";
 
 const Landing = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
+    const { user, userLoading } = useUserContext();
+    let navigate = useNavigate();
 
     useEffect(() => {
+        // if(!userLoading){
+        //     if(user?.role === "admin" || user?.role === "recruiter"){
+        //         navigate("/dashboard");
+        //     }
+        // }
+        
         const navbarHeight = navbarRef.current.getBoundingClientRect().height;
         heroRef.current.style.minHeight = `calc(100vh - ${navbarHeight}px)`;
     }, []);
+
     return (
         <>
             <Navbar navbarRef={navbarRef} />
