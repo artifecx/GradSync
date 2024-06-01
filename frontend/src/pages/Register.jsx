@@ -281,7 +281,7 @@ const Wrapper = styled.div`
         padding: 8px;
         font-size: 16px;
         letter-spacing: 1px;
-        background: var(--color-accent);
+        background: var(--color-primary);
         color: var(--color-white);
         border: none;
         border-radius: 6px;
@@ -291,7 +291,7 @@ const Wrapper = styled.div`
     }
 
     button:hover {
-        background: var(--color-primary);
+        background: var(--color-secondary);
     }
     button:disabled {
         background: var(--color-gray);

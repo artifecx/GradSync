@@ -1,8 +1,8 @@
 const links = [
-    { name: 'Open roles', href: '#' },
-    { name: 'Internship program', href: '#' },
-    { name: 'Our values', href: '#' },
-    { name: 'Meet our leadership', href: '#' },
+    { name: 'Create account', href: '#' },
+    { name: 'Upload CV/Resume', href: '#' },
+    { name: 'Filter suitable job', href: '#' },
+    { name: 'Apply job', href: '#' },
   ]
   const stats = [
     { name: 'Offices worldwide', value: '12' },
@@ -45,7 +45,7 @@ const links = [
         </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="md:text-3xl text-2xl font-bold tracking-tight text-white">How Job Portal Works</h2>
+            <h2 className="md:text-3xl text-2xl font-bold tracking-tight text-white">How <span className="text-[#743030]">Grad</span><span className="text-[#f1bf04]">Sync</span> works</h2>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
               fugiat veniam occaecat fugiat aliqua.

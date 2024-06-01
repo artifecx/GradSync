@@ -24,7 +24,7 @@ const Landing = () => {
                 <div className="hero-content">
                     <div className="text-content">
                         <h1>
-                            Get Your <span className="fancy">Dream Job </span> 
+                            Discover jobs that suits your <span className="fancy">interest & skills </span> 
                             Today!
                         </h1>
                         <p>
@@ -36,7 +36,7 @@ const Landing = () => {
                         </p>
                         <div className="btn-grp">
                             <Link className="btn" to="/all-jobs">
-                                Apply Now
+                                Job Search
                             </Link>
                         </div>
                     </div>
@@ -45,13 +45,13 @@ const Landing = () => {
                     </div>
                 </div>
             </Wrapper>
-            <div>
+            {/* <div>
             <PopularCategory/>
             <HowWorks/>
             <Team/>
             <Testimonial/>
             <Brands/>
-            </div>
+            </div> */}
         </>
     );
 };

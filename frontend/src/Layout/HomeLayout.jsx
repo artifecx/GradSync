@@ -6,7 +6,7 @@ const HomeLayout = () => {
     return (
         <div>
             <Outlet />
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     );
 };

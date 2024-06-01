@@ -214,7 +214,7 @@ const Wrapper = styled.div`
     .end-row .detail-btn {
         padding: 4px 18px;
         text-transform: capitalize;
-        background-color: var(--color-black);
+        background-color: var(--color-primary);
         color: var(--color-white);
         border-radius: 4px;
         letter-spacing: 1px;
@@ -224,12 +224,12 @@ const Wrapper = styled.div`
         border: none;
     }
     .end-row .detail-btn:hover {
-        background-color: var(--color-accent);
+        background-color: var(--color-secondary);
     }
     .end-row .apply-btn {
         padding: 4px 18px;
         text-transform: capitalize;
-        background-color: var(--color-accent);
+        background-color: var(--color-secondary);
         color: var(--color-white);
         border-radius: 4px;
         letter-spacing: 1px;
@@ -240,7 +240,7 @@ const Wrapper = styled.div`
         outline: none;
     }
     .end-row .apply-btn:hover {
-        background-color: var(--color-black);
+        background-color: var(--color-primary);
     }
 `;
 export default JobCard;
