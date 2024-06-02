@@ -13,8 +13,8 @@ dayjs.extend(advancedFormat);
 import { useUserContext } from "../../context/UserContext";
 
 import { Link } from "react-router-dom";
-import { postHandler } from "../../utils/FetchHandlers";
 import Swal from "sweetalert2";
+import { sendApplication } from '../../utils/api';
 
 const JobCard = ({ job }) => {
     const date = dayjs(job?.jobDeadline).format("MMM Do, YYYY");
@@ -32,10 +32,7 @@ const JobCard = ({ job }) => {
             resume: user?.resume || "",
         };
         try {
-            const response = await postHandler({
-                url: "https://grad-sync-backend.vercel.app/api/v1/application/apply",
-                body: appliedJob,
-            });
+            const response = await sendApplication(appliedJob);
             Swal.fire({
                 icon: "success",
                 title: "Hurray...",

@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getAllHandler } from "../utils/FetchHandlers";
+import { getAllHandler } from "../utils/api";
 
 const ManageJobs = () => {
     const {
@@ -23,10 +23,7 @@ const ManageJobs = () => {
         refetch,
     } = useQuery({
         queryKey: ["my-jobs"],
-        queryFn: () =>
-            getAllHandler(
-                `https://grad-sync-backend.vercel.app/api/v1/jobs/my-jobs`
-            ),
+        queryFn: () => getAllHandler(`jobs/my-jobs`),
     });
 
     const deleteModal = (id) => {

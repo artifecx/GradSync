@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
-import { getSingleHandler } from "../utils/FetchHandlers";
+import { getSingleHandler } from "../utils/api";
 import LoadingComTwo from "../components/shared/LoadingComTwo";
 
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -26,10 +26,7 @@ const Job = () => {
         error,
     } = useQuery({
         queryKey: ["job"],
-        queryFn: () =>
-            getSingleHandler(
-                `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`
-            ),
+        queryFn: () => getSingleHandler(`jobs/${id}`),
     });
 
     const date = dayjs(job?.jobDeadline).format("MMM Do, YYYY");

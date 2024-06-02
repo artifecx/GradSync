@@ -1,16 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import styled from "styled-components";
-import { getAllHandler } from "../utils/FetchHandlers";
+import { getAllHandler } from "../utils/api";
 import LoadingComTwo from "../components/shared/LoadingComTwo";
 
 const Admin = () => {
     const { isPending, isError, data, error } = useQuery({
         queryKey: ["admin_info"],
         queryFn: () =>
-            getAllHandler(
-                `https://grad-sync-backend.vercel.app/api/v1/admin/info`
-            ),
+            getAllHandler(`admin/info`),
     });
 
     if (isPending) {

@@ -1,9 +1,6 @@
 import React from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import styled from "styled-components";
-import LoadingComTwo from "../components/shared/LoadingComTwo";
-
-import { getSingleHandler } from "../utils/FetchHandlers";
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
@@ -19,21 +16,7 @@ const EditProfile = () => {
     const { id } = useParams();
     const { user, handleFetchMe } = useUserContext();
     const navigate = useNavigate();
-
-    // const {
-    //     isPending,
-    //     isError,
-    //     data: profile,
-    //     error,
-    // } = useQuery({
-    //     queryKey: ["profile"],
-    //     queryFn: async () => {
-    //         const response = await axios.get(
-    //             `https://grad-sync-backend.vercel.app/api/v1/users/${id}`
-    //         );
-    //         return response.data;
-    //     },
-    // });
+    
     const {
         register,
         handleSubmit,

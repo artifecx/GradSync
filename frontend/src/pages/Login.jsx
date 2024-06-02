@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { useUserContext } from "../context/UserContext";
 
 const Login = () => {
-    const { handleFetchMe, user } = useUserContext();
+    const { handleFetchMe } = useUserContext();
     const {
         register,
         handleSubmit,
@@ -19,15 +19,10 @@ const Login = () => {
     } = useForm();
 
     const [isLoading, setIsLoading] = useState(false);
-    let navigate = useNavigate();
-    let location = useLocation();
-    let from = location.state?.from?.pathname || "/"; // to navigate right location after login
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
-        // password: A@1abcde
-
-        // posting
         try {
             const response = await axios.post(
                 "https://grad-sync-backend.vercel.app/api/v1/auth/login",
@@ -45,7 +40,6 @@ const Login = () => {
 
             reset();
             navigate("/");
-            // navigate("/dashboard");
         } catch (error) {
             Swal.fire({
                 icon: "error",

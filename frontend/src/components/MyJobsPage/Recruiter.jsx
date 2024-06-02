@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LoadingComTwo from "../shared/LoadingComTwo";
 
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
-import { updateHandler } from "../../utils/FetchHandlers";
+import { updateHandler } from "../../utils/api";
 import Swal from "sweetalert2";
 const queryClient = new QueryClient();
 
@@ -52,7 +52,7 @@ const Recruiter = () => {
         const newStatus = { recruiterId, status: "accepted" };
         updateJobStatusMutation.mutate({
             body: newStatus,
-            url: `https://grad-sync-backend.vercel.app/api/v1/application/${id}`,
+            url: `application/${id}`,
         });
     };
 
@@ -60,7 +60,7 @@ const Recruiter = () => {
         const newStatus = { recruiterId, status: "rejected" };
         updateJobStatusMutation.mutate({
             body: newStatus,
-            url: `https://grad-sync-backend.vercel.app/api/v1/application/${id}`,
+            url: `application/${id}`,
         });
     };
 

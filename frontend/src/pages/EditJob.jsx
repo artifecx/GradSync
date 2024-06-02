@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getSingleHandler, updateHandler } from "../utils/FetchHandlers";
+import { getSingleHandler, updateHandler } from "../utils/api";
 import { CiSquarePlus } from "react-icons/ci";
 
 import { Job_Status, Job_Type } from "../utils/JobData";
 
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Swal from "sweetalert2";
 
 import { TagsInput } from "react-tag-input-component";
@@ -22,7 +21,7 @@ import dayjs from "dayjs";
 dayjs.extend(advancedFormat);
 
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
-const queryClient = new QueryClient(); // Create a client
+const queryClient = new QueryClient();
 
 const EditJob = () => {
     const { id } = useParams();
@@ -33,10 +32,7 @@ const EditJob = () => {
         error,
     } = useQuery({
         queryKey: ["updateJob"],
-        queryFn: () =>
-            getSingleHandler(
-                `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`
-            ),
+        queryFn: () => getSingleHandler(`jobs/${id}`),
     });
 
     const [deadline, setDeadline] = useState(new Date());
@@ -98,7 +94,7 @@ const EditJob = () => {
         // posting;
         updateJobMutation.mutate({
             body: updateJob,
-            url: `https://grad-sync-backend.vercel.app/api/v1/jobs/${id}`,
+            url: `jobs/${id}`,
         });
     };
     // const onSubmit = (data) => {

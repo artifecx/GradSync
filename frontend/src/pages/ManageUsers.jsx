@@ -5,7 +5,7 @@ import { CiSquarePlus } from "react-icons/ci";
 import styled from "styled-components";
 
 import Swal from "sweetalert2";
-import { getAllHandler } from "../utils/FetchHandlers";
+import { getAllHandler } from "../utils/api";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ const ManageUsers = () => {
     } = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-            getAllHandler(`https://grad-sync-backend.vercel.app/api/v1/users`),
+            getAllHandler(`users`),
     });
 
     const updateUserModal = (id, role) => {

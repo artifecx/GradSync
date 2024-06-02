@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { getAllHandler } from "../utils/FetchHandlers";
+import { getAllHandler } from "../utils/api";
 
 import {
     ResponsiveContainer,
@@ -30,10 +30,7 @@ const Stats = () => {
     const [isShowBarChart, setIsShowBarChart] = useState(false);
     const { isPending, isError, data, error } = useQuery({
         queryKey: ["stats"],
-        queryFn: () =>
-            getAllHandler(
-                `https://grad-sync-backend.vercel.app/api/v1/admin/stats`
-            ),
+        queryFn: () => getAllHandler(`admin/stats`),
     });
 
     // Pi Chart Codes
