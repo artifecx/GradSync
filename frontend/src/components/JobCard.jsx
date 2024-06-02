@@ -1,11 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 export const JobCard = ({ job }) => {
-
-
-
     const convertDateFormat = (inputDate) => {
         const parts = inputDate.split('-');
         if (parts.length !== 3) {
@@ -19,53 +15,21 @@ export const JobCard = ({ job }) => {
         return `${day}-${month}-${year}`;
     }
 
-
-
-
-
-
     return (
-        <>
-
-            <Link to={`/details/${job._id}`} className='text-white flex flex-col gap-2  shadow-sm shadow-gray-800 border border-gray-700 md:px-4 px-3 w-full py-2'>
-
-                <div className='flex gap-5 relative'>
-                    <div className='flex justify-center items-center  '>
-                        <img src={job.companyLogo.url} className=' w-[4rem]  ' alt="" />
-                    </div>
-                    <div className='flex flex-col '>
-
-                        <div>
-                            <p className='md:text-xl text-lg'>{job.title}</p>
-                        </div>
-                        <div className='flex justify-between gap-2 '>
-                            <div className='flex flex-col gap-1'>
-                                <p className='text-sm'>{job.companyName}</p>
-                                <p className='text-sm'>{job.exp}</p>
-                                <p className='text-sm md:flex hidden'>{job.description.slice(0, 64)}...</p>
-                                <p className='text-sm flex md:hidden'>{job.description.slice(0, 39)}...</p>
-                            </div>
-                            <div className='absolute md:right-3 right-0 md:pt-0 top-3' >
-                                <button className='blueCol font-semibold md:text-sm text-xs px-3 py-1 ' >Apply</button>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
+        <Link to={`/details/${job._id}`} className="text-black shadow-sm shadow-gray-800 rounded-lg px-4 py-2 flex flex-col gap-2 w-full">
+            <div className="ml-2 mt-4 flex justify-between items-center">
+                <img src={job.companyLogo.url} alt="Company Logo" className="h-24 w-24 object-cover" />
+                <div className="flex-1 ml-4">
+                    <h3 className="text-xl font-bold">{job.title}</h3>
+                    <div className="text-xs text-gray-600">Posted: {convertDateFormat(job.createdAt.substr(0, 10))}</div>
+                    <p className="text-sm font-medium">{job.employmentType} | {job.companyName} - {job.location}</p>
+                    <p className="text-sm mt-2">{job.description}</p>
                 </div>
-
-                <div className='flex md:gap-8 gap-3 md:text-sm text-xs'>
-                    <span>{convertDateFormat(job.createdAt.substr(0, 10))}</span>
-                    <span>{job.employmentType}</span>
-                    <span>{job.location}</span>
-                </div>
-
-            </Link>
-
-
-        </>
+            </div>
+            <div className="flexitems-center mb-4 mt-2">
+                <button className="text-xs mr-2 bg-white hover:bg-yellow-500 text-red-800 py-2 px-4 rounded-sm w-max">See Details</button>
+                <button className="text-xs bg-red-800 hover:bg-red-700 text-white py-2 px-4 rounded-sm w-max">Send Application</button>
+            </div>
+        </Link>
     )
 }
