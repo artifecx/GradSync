@@ -34,7 +34,7 @@ export const Application = () => {
         <>
 
             <MetaData title="Job Details" />
-            <div className='bg-gray-950 min-h-screen pt-14 md:px-20 px-3 text-white'>
+            <div className='bg-white min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]'>
 
                 <div className="px-3 ">
 

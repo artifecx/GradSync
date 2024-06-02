@@ -32,7 +32,7 @@ export const Dashboard = () => {
     <>
 
       <MetaData title="Dashboard" />
-      <div className='bg-gray-950 min-h-screen pt-14  md:px-20 px-3  text-white'>
+      <div className='bg-white min-h-screen pt-14  md:px-20 px-3  text-[#7A1515]'>
 
         <div className="pt-1 fixed left-0 z-20 pl-0">
           <div onClick={(() => setSideTog(!sideTog))} className='cursor-pointer blueCol px-3 py-2' size={44} >

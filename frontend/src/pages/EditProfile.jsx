@@ -93,7 +93,7 @@ const { loading, me } = useSelector(state => state.user)
         <>
 
             <MetaData title="Edit Profile" />
-            <div className='bg-gray-950 min-h-screen pt-14  md:px-20 px-3  text-white'>
+            <div className='bg-white min-h-screen pt-14  md:px-20 px-3  text-[#7A1515]'>
 
 
                 {loading ? <Loader /> :
@@ -104,7 +104,7 @@ const { loading, me } = useSelector(state => state.user)
 
                                 <div className='md:px-10 px-7 pb-6 w-full shadow-sm shadow-gray-700 border-gray-700 border pt-5  flex flex-col gap-4'>
                                     <div className='text-center'>
-                                        <p className='text-4xl  font-semibold'>Edit Profile</p>
+                                        <p className='text-4xl font-semibold'>Edit Profile</p>
                                     </div>
 
 

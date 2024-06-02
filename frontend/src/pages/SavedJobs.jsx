@@ -35,7 +35,7 @@ export const SavedJobs = () => {
     <>
 
 <MetaData title="Saved Jobs" />
-      <div className='bg-gray-950 min-h-screen pt-14 md:px-20 px-3  text-white'>
+      <div className='bg-white min-h-screen pt-14 md:px-20 px-3  text-[#7A1515]'>
 
             {loading ? <Loader/> :
               
@@ -56,8 +56,10 @@ export const SavedJobs = () => {
                         <div>
                           <img src="/images/jobEmpty.svg" className='w-52 h-52' alt="" />
                         </div>
-                      <p className='md:text-3xl pb-3 pt-4 text-xl '>You don't have any saved jobs !</p>
-                      <Link to="/jobs" className='blueCol px-5 py-1'>Browse Jobs</Link>
+                      <p className='md:text-3xl pb-6 pt-6 text-xl font-bold'>You don't have any saved jobs,</p>
+                      <Link className="btn bg-[#7A1515] hover:[#A53D3D] text-white font-semibold py-2 px-4 rounded inline-block" to="/jobs">
+                                Browse Jobs
+                            </Link>
                   </div>
                 }
 
