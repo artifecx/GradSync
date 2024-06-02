@@ -14,17 +14,17 @@ const AdminController = require("../Controller/AdminController");
 // Authentication routes
 AdminRouter.get(
     "/info",
-    userAuthorizationHandler("admin"),
+    userAuthorizationHandler(0),
     AdminController.getAllInfo
 );
 AdminRouter.get(
     "/stats",
-    userAuthorizationHandler("admin"),
+    userAuthorizationHandler(0),
     AdminController.monthlyInfo
 );
 AdminRouter.patch(
     "/update-role",
-    userAuthorizationHandler("admin"),
+    userAuthorizationHandler(0),
     AdminController.updateUserRole
 );
 module.exports = AdminRouter;

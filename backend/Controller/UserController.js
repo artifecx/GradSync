@@ -1,4 +1,6 @@
 const UserModel = require("../Model/UserModel");
+const ApplicantModel = require("../Model/ApplicantModel");
+const RecruiterModel = require("../Model/RecruiterModel");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -56,7 +58,19 @@ exports.logOut = async (req, res, next) => {
 };
 
 exports.getSingleUser = async (req, res, next) => {
-    res.send("get single user");
+    try {
+        const user = await UserModel.findById(req.params.id).select("-password");
+        if (!user) {
+            next(createError(404, "User not found"));
+        } else {
+            res.status(200).json({
+                status: true,
+                result: user,
+            });
+        }
+    } catch (error) {
+        next(createError(500, error.message));
+    }
 };
 
 exports.addUser = async (req, res, next) => {
@@ -66,21 +80,12 @@ exports.addUser = async (req, res, next) => {
         if (isUserExists) {
             next(createError(500, "Email Already exists"));
         } else {
-            const isFirstUser = (await UserModel.countDocuments()) === 0;
-            req.body.role = isFirstUser ? "admin" : "user";
             const newUser = new UserModel(data);
             const result = await newUser.save();
 
-            // Exclude(remove) password field from the result
-            // const { password, ...resultWithoutPassword } = result.toObject();
-
-            // const tokenObj = { ID: result._id, email: result.email };
-            // const TOKEN = JWTGenerator(tokenObj, "1d");
             res.status(200).json({
                 status: true,
                 message: "Registered Successfully",
-                // result: resultWithoutPassword,
-                // TOKEN,
             });
         }
     } catch (error) {
@@ -101,7 +106,7 @@ exports.loginUser = async (req, res, next) => {
             if (isPasswordMatched) {
                 const tokenObj = {
                     ID: isUserExists._id,
-                    role: isUserExists.role,
+                    role: isUserExists.user_type,
                 };
                 const TOKEN = JWTGenerator(tokenObj);
 
@@ -132,31 +137,17 @@ exports.loginUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     const data = req.body;
     try {
-        if (req?.user?.email !== data?.email) {
-            next(createError(500, `You have no permission to update`));
-        } else {
-            const updateUser = await UserModel.updateOne(
-                { _id: req.user._id },
-                { $set: data }
-            );
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            req.user._id,
+            { $set: data },
+            { new: true }
+        ).select("-password");
 
-            if (updateUser.nModified > 0) {
-                const updatedUser = await UserModel.findById(
-                    req.user._id
-                ).select("-password");
-                res.status(200).json({
-                    status: true,
-                    message: "Profile Updated",
-                    result: updatedUser,
-                });
-            } else {
-                res.status(200).json({
-                    status: false,
-                    message: "No changes were made",
-                    result: null,
-                });
-            }
-        }
+        res.status(200).json({
+            status: true,
+            message: "Profile Updated",
+            result: updatedUser,
+        });
     } catch (error) {
         next(createError(500, `Something went wrong: ${error.message}`));
     }
@@ -192,7 +183,7 @@ exports.deleteAllUser = async (req, res, next) => {
         result = await UserModel.deleteMany({});
         res.status(201).json({
             status: true,
-            message: "All userd deleted",
+            message: "All users deleted",
         });
     } catch (error) {
         next(createError(500, `something wrong: ${error.message}`));

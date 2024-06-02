@@ -3,28 +3,28 @@ const { STATUS } = require("../Utils/ApplicationConstants");
 const mongoose = require("mongoose");
 
 exports.checkInput = [
-    check("applicantId")
+    check("applicant_id")
         .trim()
         .notEmpty()
         .withMessage("Application must have an Applicant ID")
-        .custom(async (applicationId, { req }) => {
-            if (!mongoose.Types.ObjectId.isValid(applicationId)) {
-                throw new Error("Invalid Application ID");
+        .custom(async (applicantId, { req }) => {
+            if (!mongoose.Types.ObjectId.isValid(applicantId)) {
+                throw new Error("Invalid Applicant ID");
             }
         }),
-    check("recruiterId")
+    check("recruiter_id")
         .trim()
         .notEmpty()
-        .withMessage("Application must have an Recruiter ID")
+        .withMessage("Application must have a Recruiter ID")
         .custom(async (recruiterId, { req }) => {
             if (!mongoose.Types.ObjectId.isValid(recruiterId)) {
                 throw new Error("Invalid Recruiter ID");
             }
         }),
-    check("jobId")
+    check("job_id")
         .trim()
         .notEmpty()
-        .withMessage("Application must have an Job ID")
+        .withMessage("Application must have a Job ID")
         .custom(async (jobId, { req }) => {
             if (!mongoose.Types.ObjectId.isValid(jobId)) {
                 throw new Error("Invalid Job ID");
@@ -33,14 +33,9 @@ exports.checkInput = [
     check("status")
         .isIn(Object.values(STATUS))
         .withMessage("Invalid job status"),
-    check("dateOfApplication")
+    check("application_date")
         .notEmpty()
         .withMessage("Application Date is required")
         .isDate()
         .withMessage("Invalid date format. Please provide a valid date."),
-    check("resume")
-        .notEmpty()
-        .withMessage("Applicant's Resume is required")
-        .isURL()
-        .withMessage("Invalid URL. Please provide a valid URL."),
 ];

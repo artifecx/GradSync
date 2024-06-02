@@ -1,24 +1,11 @@
 const ApplicationModel = require("../Model/ApplicationModel");
-const mongoose = require("mongoose");
 const createError = require("http-errors");
+const mongoose = require("mongoose");
 
-const day = require("dayjs");
-
-exports.testing = async (req, res, next) => {
+exports.getCandidateAppliedJobs = async (req, res, next) => {
     try {
-        res.status(200).json({
-            status: "Ok",
-        });
-    } catch (error) {
-        next(createError(500, error.message));
-    }
-};
+        const filters = { ...req.query, applicant_id: req.user._id };
 
-module.exports.getCandidateAppliedJobs = async (req, res, next) => {
-    try {
-        const filters = { ...req.query, applicantId: req.user._id }; // to make a copy so that original don't moidfied
-        console.log(filters);
-        // exclude
         const excludeFields = ["sort", "page", "limit", "fields", "search"];
         excludeFields.forEach((field) => delete filters[field]);
 
@@ -48,12 +35,8 @@ module.exports.getCandidateAppliedJobs = async (req, res, next) => {
             queries.page = page;
         }
 
-        const { result, totalJobs, pageCount, page } = await getData(
-            filters,
-            queries
-        );
+        const { result, totalJobs, pageCount, page } = await getData(filters, queries);
 
-        // response
         if (result.length !== 0) {
             res.status(200).json({
                 status: true,
@@ -88,12 +71,10 @@ const getData = async (filters, queries) => {
                 sortCriteria = { position: -1 };
                 break;
             default:
-                // Default sorting criteria if none of the options match
                 sortCriteria = { createdAt: -1 };
                 break;
         }
     } else {
-        // Default sorting criteria if sortBy parameter is not provided
         sortCriteria = { createdAt: -1 };
     }
     const result = await ApplicationModel.find(filters)
@@ -101,20 +82,19 @@ const getData = async (filters, queries) => {
         .limit(queries.limit)
         .sort(sortCriteria)
         .select(queries.fields)
-        .populate("jobId");
+        .populate("job_id");
 
-    // it not depend on previous one, its document number will be based on filter passing here
     const totalJobs = await ApplicationModel.countDocuments(filters);
     const pageCount = Math.ceil(totalJobs / queries.limit);
     return { result, totalJobs, pageCount, page: queries.page };
 };
 
-module.exports.getRecruiterPostJobs = async (req, res, next) => {
-    const filter = { recruiterId: req.user._id };
+exports.getRecruiterPostJobs = async (req, res, next) => {
+    const filter = { recruiter_id: req.user._id };
     try {
-        const result = await ApplicationModel.find(filter).populate("jobId");
+        const result = await ApplicationModel.find(filter).populate("job_id");
         const totalJobs = await ApplicationModel.countDocuments(filter);
-        // response
+
         if (result.length !== 0) {
             res.status(200).json({
                 status: true,
@@ -132,8 +112,8 @@ module.exports.getRecruiterPostJobs = async (req, res, next) => {
 exports.applyInJob = async (req, res, next) => {
     try {
         const alreadyApplied = await ApplicationModel.findOne({
-            applicantId: req.body.applicantId,
-            jobId: req.body.jobId,
+            applicant_id: req.body.applicant_id,
+            job_id: req.body.job_id,
         });
 
         if (alreadyApplied) {
@@ -151,13 +131,12 @@ exports.applyInJob = async (req, res, next) => {
     }
 };
 
-module.exports.updateJobStatus = async (req, res, next) => {
+exports.updateJobStatus = async (req, res, next) => {
     const { id } = req.params;
     const data = req.body;
 
     try {
-        if (data?.recruiterId?.toString() === req?.user._id.toString()) {
-            console.log("same");
+        if (data?.recruiter_id?.toString() === req?.user._id.toString()) {
             if (!mongoose.Types.ObjectId.isValid(id)) {
                 next(createError(400, "Invalid Job ID format"));
             }
