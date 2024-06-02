@@ -143,12 +143,12 @@ const EditProfile = () => {
                                     id="role"
                                     name="role"
                                     placeholder="Type Here"
-                                    defaultValue={user?.role}
+                                    defaultValue={user?.user_type}
                                     readOnly
                                 />
-                                {errors?.role && (
+                                {errors?.user_type && (
                                     <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
-                                        {errors?.role?.message}
+                                        {errors?.user_type?.message}
                                     </span>
                                 )}
                             </div>
@@ -181,7 +181,7 @@ const EditProfile = () => {
                             </div>
 
                             {/* Resume */}
-                            {user.role !== "admin" && user.role !== "recruiter" && (
+                            {user.user_type !== "admin" && user.user_type !== "recruiter" && (
                             <div className="row">
                                 <label htmlFor="resume">Resume Link</label>
                                 <input

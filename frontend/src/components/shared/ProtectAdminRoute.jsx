@@ -11,7 +11,7 @@ const ProtectAdminRoute = ({ children }) => {
         return <Loading />;
     }
 
-    if (user?.email && user?.role === "admin") {
+    if (user?.email && user?.user_type === "admin") {
         return children;
     }
     return <Navigate to="/" />;

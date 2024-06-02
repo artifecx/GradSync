@@ -16,7 +16,16 @@ const UserContext = ({ children }) => {
                 { withCredentials: true }
             );
             setUserError({ status: false, message: "" });
-            setUser(response?.data?.result);
+            const modifiedUser = {
+                ...response.data.result,
+                user_type: response.data.result.user_type === 1 
+                    ? "applicant" 
+                    : (response.data.result.user_type === 2 
+                        ? "recruiter" 
+                        : "admin")
+            };
+            
+            setUser(modifiedUser);
         } catch (error) {
             setUserError({ status: true, message: error?.message });
             setUser({ status: false });

@@ -19,7 +19,7 @@ const Landing = () => {
 
     useEffect(() => {
         // if(!userLoading){
-        //     if(user?.role === "admin" || user?.role === "recruiter"){
+        //     if(user?.user_type === "admin" || user?.user_type === "recruiter"){
         //         navigate("/dashboard");
         //     }
         // }

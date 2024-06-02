@@ -37,5 +37,4 @@ exports.checkUserUpdateInput = [
     check("location").trim(),
     check("gender").trim(),
     check("user_type").isIn([0, 1, 2]).withMessage("Invalid user type"),
-    check("resume").trim(),
 ];

@@ -34,7 +34,7 @@ const Register = () => {
             return;
         } else {
             setIsLoading(true);
-            const user = { username, email, password };
+            const user = { username, email, password, user_type: 1 };
             // posting
             try {
                 const response = await axios.post(

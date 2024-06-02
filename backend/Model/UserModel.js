@@ -21,9 +21,6 @@ const UserSchema = new mongoose.Schema(
         gender: {
             type: String,
         },
-        resume: {
-            type: String,
-        },
     },
     options
 );
