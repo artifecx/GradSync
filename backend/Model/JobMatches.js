@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const JobMatchesSchema = new mongoose.Schema(
+const job_matchesSchema = new mongoose.Schema(
     {
         applicant_id: { type: mongoose.Schema.Types.ObjectId, ref: "Applicant", required: true },
         matched_jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
     }
 );
 
-const JobMatchesModel = mongoose.model("JobMatches", JobMatchesSchema);
-module.exports = JobMatchesModel;
+const job_matchesModel = mongoose.model("job_matches", job_matchesSchema);
+module.exports = job_matchesModel;

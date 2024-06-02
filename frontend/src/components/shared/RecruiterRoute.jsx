@@ -10,7 +10,7 @@ const RecruiterRoute = ({ children }) => {
         return <Loading />;
     }
 
-    if (user?.email && user?.role === "recruiter") {
+    if (user?.email && user?.user_type === "recruiter") {
         return children;
     }
     return <Navigate to="/" />;

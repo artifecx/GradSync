@@ -103,47 +103,47 @@ const ManageUsers = () => {
                                     <td>{i}</td>
                                     <td>{user?.username}</td>
                                     <td>{user?.email}</td>
-                                    <td>{user?.role}</td>
+                                    <td>{user?.user_type}</td>
                                     <td className="action-row">
                                         {user?._id === me._id ? null : (
                                             <>
                                                 {" "}
-                                                {user?.role ===
-                                                "admin" ? null : (
+                                                {user?.user_type ===
+                                                0 ? null : (
                                                     <button
                                                         className="action admin"
                                                         onClick={() =>
                                                             updateUserModal(
                                                                 user._id,
-                                                                "admin"
+                                                                0
                                                             )
                                                         }
                                                     >
                                                         admin
                                                     </button>
                                                 )}
-                                                {user?.role ===
-                                                "recruiter" ? null : (
+                                                {user?.user_type ===
+                                                2 ? null : (
                                                     <button
                                                         className="action recruiter"
                                                         onClick={() =>
                                                             updateUserModal(
                                                                 user._id,
-                                                                "recruiter"
+                                                                2
                                                             )
                                                         }
                                                     >
                                                         recuiter
                                                     </button>
                                                 )}
-                                                {user?.role ===
-                                                "user" ? null : (
+                                                {user?.user_type ===
+                                                1 ? null : (
                                                     <button
                                                         className="action user"
                                                         onClick={() =>
                                                             updateUserModal(
                                                                 user._id,
-                                                                "user"
+                                                                1
                                                             )
                                                         }
                                                     >

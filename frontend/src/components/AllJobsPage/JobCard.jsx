@@ -90,7 +90,7 @@ const JobCard = ({ job }) => {
                     <Link to={`/job/${job._id}`} className="detail-btn">
                         details
                     </Link>
-                    {user?.role === "user" && (
+                    {user?.user_type === "user" && (
                         <button
                             className="apply-btn"
                             onClick={() => handleApply(job._id)}

@@ -52,14 +52,20 @@ const Profile = () => {
                             </tr>
                             <tr className="row">
                                 <td className="info">Role :</td>
-                                <td className="value">{user?.role}</td>
+                                <td className="value">{user?.user_type}</td>
+                            </tr>
+                            <tr className="row">
+                                <td className="info">Number :</td>
+                                <td className="value">
+                                    {user?.phone_number || "not available"}
+                                </td>
                             </tr>
                             <tr className="row">
                                 <td className="info">email :</td>
                                 <td className="value email">{user?.email}</td>
                             </tr>
                             <tr className="row">
-                                <td className="info">Join :</td>
+                                <td className="info">Joined :</td>
                                 <td className="value">{date}</td>
                             </tr>
                             <tr className="row">
@@ -70,7 +76,7 @@ const Profile = () => {
                             </tr>
                             <tr className="row">
                                 <td className="info">Gender :</td>
-                                <td className="value">{user?.gender}</td>
+                                <td className="value">{user?.gender || "not available"}</td>
                             </tr>
                         </tbody>
                     </table>

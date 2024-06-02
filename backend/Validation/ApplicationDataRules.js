@@ -7,8 +7,8 @@ exports.checkInput = [
         .trim()
         .notEmpty()
         .withMessage("Application must have an Applicant ID")
-        .custom(async (applicantId, { req }) => {
-            if (!mongoose.Types.ObjectId.isValid(applicantId)) {
+        .custom(async (applicant_id, { req }) => {
+            if (!mongoose.Types.ObjectId.isValid(applicant_id)) {
                 throw new Error("Invalid Applicant ID");
             }
         }),
@@ -16,8 +16,8 @@ exports.checkInput = [
         .trim()
         .notEmpty()
         .withMessage("Application must have a Recruiter ID")
-        .custom(async (recruiterId, { req }) => {
-            if (!mongoose.Types.ObjectId.isValid(recruiterId)) {
+        .custom(async (recruiter_id, { req }) => {
+            if (!mongoose.Types.ObjectId.isValid(recruiter_id)) {
                 throw new Error("Invalid Recruiter ID");
             }
         }),
@@ -25,8 +25,8 @@ exports.checkInput = [
         .trim()
         .notEmpty()
         .withMessage("Application must have a Job ID")
-        .custom(async (jobId, { req }) => {
-            if (!mongoose.Types.ObjectId.isValid(jobId)) {
+        .custom(async (job_id, { req }) => {
+            if (!mongoose.Types.ObjectId.isValid(job_id)) {
                 throw new Error("Invalid Job ID");
             }
         }),

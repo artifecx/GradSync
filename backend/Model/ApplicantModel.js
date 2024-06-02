@@ -5,7 +5,7 @@ const ApplicantSchema = new mongoose.Schema(
     {
         first_name: String,
         last_name: String,
-        cv: Object,
+        resume: Object,
         job_matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
         applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Application" }],
     }
