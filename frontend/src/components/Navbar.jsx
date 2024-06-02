@@ -14,6 +14,8 @@ import { logOrNot } from '../actions/UserActions';
 import { useNavigate } from 'react-router-dom';
 import { logoutClearState } from '../slices/UserSlice';
 import { motion } from "framer-motion";
+import logo from "../assets/logo2.png"
+
 
 export const Navbar = () => {
     const { isLogin, me } = useSelector(state => state.user);
@@ -32,14 +34,14 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className='text-white z-20 fixed min-w-full bg-gray-950'>
-                <ul className='md:flex hidden justify-center items-center gap-24 pt-4 pb-3 font-semibold text-xl'>
+            <div className='text-white z-22 fixed min-w-full bg-[#7A1515]'>
+                <ul className='md:flex hidden justify-center items-center gap-28 pt-3 pb-3 font-normal text-sm'>
                 <Link to="/" className='flex fixed left-24 justify-center items-center titleT'>
-                        <MdOutlineBusinessCenter size={19} />  GradSync
+                        <img src={logo} alt="Logo" className="h-8 mr-3" /> 
                     </Link>
 
                     <Link to="/" className='cool-link'>Home</Link>
-                    <Link to="/jobs" className='cool-link'>Jobs</Link>
+                    <Link to="/jobs" className='cool-link'>Find Job</Link>
                     <Link to='/contact' className='cool-link'>Contact</Link>
                     <Link to='/about' className='cool-link'>About</Link>
 
@@ -60,8 +62,8 @@ export const Navbar = () => {
                         </Menu>
                     ) : (
                         <span className='fixed right-24 flex gap-3'>
-                            <Link className='cursor-pointer text-sm px-3 py-1 rounded-xl blueCol' to="/login">Login</Link>
-                            <Link className='cursor-pointer text-sm px-3 py-1 rounded-xl blueCol' to="/register">Register</Link>
+                            <Link className='cursor-pointer font-semibold text-[16px] px-4 py-1 rounded-[3px] bg-white text-[#743030]' to="/login">Sign In</Link>
+                            <Link className='cursor-pointer font-semibold text-[16px] px-4 py-1 rounded-[3px] bg-[#FFBF03] text-[#743030]' to="/register">Register</Link>
                         </span>
                     )}
                 </ul>
@@ -104,8 +106,6 @@ export const Navbar = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className='bg-white border-b md:mx-20 mx-3'></div>
 
                 <div className={` ${toggle ? "flex" : "hidden"} absolute w-screen h-screen z-20 md:hidden`}>
                     <ul className='bg-gray-950 bg-opacity-95 flex flex-col gap-20 text-2xl justify-start w-screen pt-20 items-center'>
