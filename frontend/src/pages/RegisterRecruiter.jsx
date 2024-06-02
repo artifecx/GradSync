@@ -6,6 +6,7 @@ import { TbLoader2 } from 'react-icons/tb';
 import { registerUser } from '../actions/UserActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
+import backgroundImage from "../assets/loginBG.png";
 
 export const RegisterRecruiter = () => {
   const { loading, isLogin } = useSelector(state => state.user);
@@ -64,148 +65,144 @@ export const RegisterRecruiter = () => {
   return (
     <>
       <MetaData title="Register" />
-      <div className="min-h-screen flex items-center justify-center relative">
-        <div className="absolute inset-0 flex">
-          <div className="w-2/3 bg-white flex flex-col justify-center items-center p-10 relative">
-            <div className="w-full max-w-xl space-y-8">
-              <div className="flex justify-between items-center mb-8 w-full">
-                <div className="text-left">
-                  <h2 className="text-left text-3xl font-bold text-red-800">Register as Recruiter</h2>
-                  <p className="text-gray-600 font-semibold">Already have an account? <Link to="/login" className="text-red-800">Login now</Link></p>
-                </div>
-                <div>
-                  <p className="text-right text-gray-600 font-semibold">Register as <Link to="/register" className="text-red-800">Applicant?</Link></p>
-                </div>
+      <div className="flex items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className='bg-white min-h-screen pt-14 md:px-md text-[#7A1515] flex items-center justify-left w-full bg-opacity-0'>
+          <form onSubmit={registerHandler} className='ml-28 flex flex-col p-8 bg-white rounded-md' style={{ maxWidth: '500px', width: '100%' }}>
+            <div className="flex justify-between text-left mb-2">
+              <div>
+                <p className='text-left mb-3 text-4xl font-bold'>Recruiter</p>
+                <p className="text-left text-black text-sm pb-6">Already have an account? <Link to="/login" className="text-[#7A1515] underline">Login now</Link></p>
               </div>
-              <form onSubmit={registerHandler} className="space-y-6 w-full">
-                <TextField
-                  id="name"
-                  name="name"
-                  label="Company / Organization Name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      fontWeight: '400',
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#991b1b',
-                      fontWeight: '600',
-                    },
-                    '& .MuiInputLabel-root.MuiFormLabel-filled': {
-                      fontWeight: '600',
-                    },
-                  }}
-                />
-                <TextField
-                  id="email"
-                  name="email"
-                  label="Email Address"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      fontWeight: '400',
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#991b1b',
-                      fontWeight: '600',
-                    },
-                    '& .MuiInputLabel-root.MuiFormLabel-filled': {
-                      fontWeight: '600',
-                    },
-                  }}
-                />
-                <TextField
-                  id="password"
-                  name="password"
-                  label="Password"
-                  type={eyeTog ? "text" : "password"}
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#991b1b',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      fontWeight: '400',
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#991b1b',
-                      fontWeight: '600',
-                    },
-                    '& .MuiInputLabel-root.MuiFormLabel-filled': {
-                      fontWeight: '600',
-                    },
-                  }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => setEyeTog(!eyeTog)}
-                        >
-                          {eyeTog ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <div className="flex space-x-4">
-                  <label htmlFor="avatar" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
-                    {avatarName.length === 0 ? 'Upload Company Logo' : avatarName}
-                    <input id="avatar" name="avatar" type="file" accept="image/*" className="hidden" onChange={avatarChange} />
-                  </label>
-                </div>
-                <div>
-                <button type="submit" disabled={loading} className="w-full py-3 bg-red-900 font-bold text-white rounded-sm shadow-md hover:bg-red-950 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-opacity-75 flex justify-center items-center">
-                  {loading ? <TbLoader2 className="animate-spin" size={24} /> : 'Sign Up'}
-                </button>
-                </div>
-              </form>
+              <div>
+                <p className="text-right text-black text-sm pb-6">Register as <Link to="/register" className="text-[#7A1515] underline">Applicant?</Link></p>
+              </div>
             </div>
-            <div className="absolute inset-0 bg-white transform rotate-12 origin-bottom-left" style={{zIndex: '-1', height: '140%', top: '-50%'}}></div>
-          </div>
-          <div className="w-1/3 relative" style={{zIndex: '-2'}}>
-            <img src="/mnt/data/image.png" alt="Background" className="absolute inset-0 w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-red-800 opacity-50"></div>
-            <div className="absolute bottom-10 left-10 text-white">
-              <p className="text-3xl font-semibold">Over 12,345 opportunities waiting for good candidates.</p>
+
+            <TextField
+              id="name"
+              name="name"
+              label="Company / Organization Name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontWeight: '400',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#991b1b',
+                  fontWeight: '600',
+                },
+                '& .MuiInputLabel-root.MuiFormLabel-filled': {
+                  fontWeight: '600',
+                },
+              }}
+            />
+
+            <TextField
+              id="email"
+              name="email"
+              label="Email Address"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontWeight: '400',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#991b1b',
+                  fontWeight: '600',
+                },
+                '& .MuiInputLabel-root.MuiFormLabel-filled': {
+                  fontWeight: '600',
+                },
+              }}
+            />
+
+            <TextField
+              id="password"
+              name="password"
+              label="Password"
+              type={eyeTog ? "text" : "password"}
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontWeight: '400',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#991b1b',
+                  fontWeight: '600',
+                },
+                '& .MuiInputLabel-root.MuiFormLabel-filled': {
+                  fontWeight: '600',
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setEyeTog(!eyeTog)}
+                    >
+                      {eyeTog ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <div className='flex space-x-4 mb-6 mt-4'>
+              <label htmlFor="avatar" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
+                {avatarName.length === 0 ? 'Upload Company Logo' : avatarName}
+                <input id="avatar" name="avatar" type="file" accept="image/*" className="hidden" onChange={avatarChange} />
+              </label>
             </div>
-          </div>
+
+            <div>
+              <button
+                disabled={loading}
+                className='bg-[#7A1515] hover:bg-[#A53D3D] text-white font-semibold py-2 px-4 rounded w-full flex justify-center items-center'
+              >
+                {loading ? <TbLoader2 className='animate-spin' size={24} /> : "Sign Up"}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>
