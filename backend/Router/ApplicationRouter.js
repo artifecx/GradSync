@@ -21,7 +21,7 @@ const {
 
 ApplicationRouter.get(
     "/applicant-jobs",
-    userAuthorizationHandler("user"),
+    userAuthorizationHandler(1),
     ApplicationController.getCandidateAppliedJobs
 );
 
@@ -29,19 +29,19 @@ ApplicationRouter.post(
     "/apply",
     checkInput,
     inputValidationMiddleware,
-    userAuthorizationHandler("user"),
+    userAuthorizationHandler(1),
     ApplicationController.applyInJob
 );
 
 ApplicationRouter.get(
     "/recruiter-jobs",
-    userAuthorizationHandler("recruiter"),
+    userAuthorizationHandler(2),
     ApplicationController.getRecruiterPostJobs
 );
 
 ApplicationRouter.patch(
     "/:id",
-    userAuthorizationHandler("recruiter"),
+    userAuthorizationHandler(2),
     ApplicationController.updateJobStatus
 );
 

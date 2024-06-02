@@ -1,27 +1,31 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const options = { discriminatorKey: 'user_type', timestamps: true };
+
 const UserSchema = new mongoose.Schema(
     {
         username: String,
         email: String,
         password: String,
+        profile_picture: String,
+        phone_number: String,
+        user_type: {
+            type: Number,
+            enum: [0, 1, 2], // 0 for Admin, 1 for Applicant, 2 for Recruiter
+            default: 1,
+        },
         location: {
             type: String,
         },
         gender: {
             type: String,
         },
-        role: {
-            type: String,
-            enum: ["admin", "recruiter", "user"],
-            default: "user",
-        },
         resume: {
             type: String,
         },
     },
-    { timestamps: true } // to keep track
+    options
 );
 
 // Hashing Password

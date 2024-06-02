@@ -17,22 +17,22 @@ exports.checkJobInput = [
     check("jobVacancy")
         .trim()
         .notEmpty()
-        .withMessage("Job Vacancy is requried"),
-    check("jobSalary").trim().notEmpty().withMessage("Job Salary is requried"),
+        .withMessage("Job Vacancy is required"),
+    check("jobSalary").trim().notEmpty().withMessage("Job Salary is required"),
     check("jobDeadline")
         .trim()
         .notEmpty()
-        .withMessage("Job Deadline is requried"),
+        .withMessage("Job Deadline is required"),
     check("jobDescription")
         .trim()
         .notEmpty()
-        .withMessage("Job Description is requried"),
-    check("jobSkills").isArray({ min: 1 }).withMessage("Job Skills is requrie"),
+        .withMessage("Job Description is required"),
+    check("jobSkills").isArray({ min: 1 }).withMessage("Job Skills are required"),
     check("jobFacilities")
         .isArray({ min: 1 })
-        .withMessage("Job Facilities is requrie"),
+        .withMessage("Job Facilities are required"),
     check("jobContact")
         .trim()
         .notEmpty()
-        .withMessage("Job contact is requried"),
+        .withMessage("Job contact is required"),
 ];

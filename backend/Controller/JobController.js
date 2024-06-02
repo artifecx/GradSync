@@ -1,14 +1,12 @@
 const JobModel = require("../Model/JobModel");
 const ApplicationModel = require("../Model/ApplicationModel");
-
 const createError = require("http-errors");
 const mongoose = require("mongoose");
 
-module.exports.getAllJobs = async (req, res, next) => {
+exports.getAllJobs = async (req, res, next) => {
     try {
-        const filters = { ...req.query }; // to make a copy so that original don't moidfied
+        const filters = { ...req.query };
 
-        // exclude
         const excludeFields = ["sort", "page", "limit", "fields", "search"];
         excludeFields.forEach((field) => delete filters[field]);
 
@@ -55,7 +53,6 @@ module.exports.getAllJobs = async (req, res, next) => {
                         $regex: new RegExp(".*" + searchQuery + ".*", "i"),
                     },
                 },
-                // Add more fields as needed
             ];
         }
         if (req.query.page) {
@@ -68,12 +65,8 @@ module.exports.getAllJobs = async (req, res, next) => {
             queries.page = page;
         }
 
-        const { result, totalJobs, pageCount, page } = await getData(
-            filters,
-            queries
-        );
+        const { result, totalJobs, pageCount, page } = await getData(filters, queries);
 
-        // response
         if (result.length !== 0) {
             res.status(200).json({
                 status: true,
@@ -90,12 +83,9 @@ module.exports.getAllJobs = async (req, res, next) => {
     }
 };
 
-module.exports.getMyJobs = async (req, res, next) => {
+exports.getMyJobs = async (req, res, next) => {
     try {
-        const result = await JobModel.find({
-            createdBy: req.user._id,
-        }).populate("createdBy", "username email");
-        // here in populate only give the "username(selected filed) or only (-password) ommited fields" else showing error
+        const result = await JobModel.find({ recruiter_id: req.user._id }).populate("recruiter_id", "username email");
 
         if (result?.length) {
             res.status(200).json({
@@ -124,18 +114,16 @@ const getData = async (filters, queries) => {
                 sortCriteria = { createdAt: 1 };
                 break;
             case "a-z":
-                sortCriteria = { position: 1 };
+                sortCriteria = { title: 1 };
                 break;
             case "z-a":
-                sortCriteria = { position: -1 };
+                sortCriteria = { title: -1 };
                 break;
             default:
-                // Default sorting criteria if none of the options match
                 sortCriteria = { createdAt: -1 };
                 break;
         }
     } else {
-        // Default sorting criteria if sortBy parameter is not provided
         sortCriteria = { createdAt: -1 };
     }
     const result = await JobModel.find(filters)
@@ -144,13 +132,12 @@ const getData = async (filters, queries) => {
         .sort(sortCriteria)
         .select(queries.fields);
 
-    // it not depend on previous one, its document number will be based on filter passing here
     const totalJobs = await JobModel.countDocuments(filters);
     const pageCount = Math.ceil(totalJobs / queries.limit);
     return { result, totalJobs, pageCount, page: queries.page };
 };
 
-module.exports.getSingleJob = async (req, res, next) => {
+exports.getSingleJob = async (req, res, next) => {
     const { id } = req.params;
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -170,17 +157,16 @@ module.exports.getSingleJob = async (req, res, next) => {
     }
 };
 
-module.exports.addJob = async (req, res, next) => {
+exports.addJob = async (req, res, next) => {
     const jobData = req.body;
     try {
         const isJobExists = await JobModel.findOne({
-            company: jobData.comapny,
+            title: jobData.title,
         });
         if (isJobExists) {
             next(createError(500, "Job data already exist"));
         } else {
-            console.log(req?.user);
-            jobData.createdBy = req?.user?._id;
+            jobData.recruiter_id = req.user._id;
             const newJob = new JobModel(jobData);
             const result = await newJob.save();
 
@@ -194,7 +180,7 @@ module.exports.addJob = async (req, res, next) => {
     }
 };
 
-module.exports.updateSingleJob = async (req, res, next) => {
+exports.updateSingleJob = async (req, res, next) => {
     const { id } = req.params;
     const data = req.body;
     try {
@@ -220,7 +206,7 @@ module.exports.updateSingleJob = async (req, res, next) => {
     }
 };
 
-module.exports.deleteSingleJob = async (req, res, next) => {
+exports.deleteSingleJob = async (req, res, next) => {
     const { id } = req.params;
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -234,9 +220,7 @@ module.exports.deleteSingleJob = async (req, res, next) => {
                 message: "Job not found",
             });
         } else {
-            // Find and delete associated applications
-
-            await ApplicationModel.deleteMany({ jobId: id });
+            await ApplicationModel.deleteMany({ job_id: id });
             const result = await JobModel.findByIdAndDelete(id);
 
             res.status(200).json({
@@ -250,7 +234,7 @@ module.exports.deleteSingleJob = async (req, res, next) => {
     }
 };
 
-module.exports.deleteAllJobs = async (req, res, next) => {
+exports.deleteAllJobs = async (req, res, next) => {
     try {
         result = await JobModel.deleteMany({});
         res.status(201).json({

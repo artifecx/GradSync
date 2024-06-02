@@ -10,7 +10,7 @@ exports.authenticateUser = async (req, res, next) => {
     }
     try {
         const { ID, role } = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await UserModel.findOne({ _id: ID, role }).select(
+        req.user = await UserModel.findOne({ _id: ID, user_type: role }).select(
             "-password"
         );
         next();

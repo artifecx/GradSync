@@ -1,8 +1,8 @@
-const userAuthorizationHandler = (...role) => {
+const userAuthorizationHandler = (...roles) => {
     return (req, res, next) => {
-        const userRole = req?.user?.role;
+        const userRole = req?.user?.user_type;
 
-        if (!role.includes(userRole)) {
+        if (!roles.includes(userRole)) {
             return res.status(403).json({
                 status: false,
                 message: "You don't have permission",
@@ -12,7 +12,6 @@ const userAuthorizationHandler = (...role) => {
     };
 };
 
-// module.exports = userAuthorizationHandler;
 module.exports = {
-    userAuthorizationHandler: userAuthorizationHandler,
+    userAuthorizationHandler,
 };

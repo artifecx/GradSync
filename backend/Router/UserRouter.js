@@ -17,20 +17,14 @@ const {
     userAuthorizationHandler,
 } = require("./../Middleware/UserAuthorizationMiddleware");
 
-// userAuthorizationHandler("admin"),
 // Routes
 UserRouter.route("/")
-    .get(userAuthorizationHandler("admin"), UserController.getAllUser)
-    .patch(UserController.updateUser)
-    .delete(UserController.deleteAllUser);
+    .get(userAuthorizationHandler(0), UserController.getAllUser) // Only admin (user_type 0) can get all users
+    .patch(checkUserUpdateInput, inputValidationMiddleware, UserController.updateUser)
+    .delete(userAuthorizationHandler(0), UserController.deleteAllUser);
 
 UserRouter.route("/:id")
     .get(UserController.getSingleUser)
-    .delete(userAuthorizationHandler("admin"), UserController.deleteUser);
+    .delete(userAuthorizationHandler(0), UserController.deleteUser); // Only admin (user_type 0) can delete users
 
 module.exports = UserRouter;
-
-// Extra----------------------------
-// UserRouter.get("/", JobController.getAllJobs); //Get all jobs
-// UserRouter.post("/", JobController.addJob); //Add all jobs
-// UserRouter.get("/:id", JobController.getSingleJob); //Get Single all jobs

@@ -1,5 +1,5 @@
 const express = require("express");
-const JobRouter = express.Router(); // create a router
+const JobRouter = express.Router();
 
 // Controllers
 const JobController = require("../Controller/JobController");
@@ -38,8 +38,3 @@ JobRouter.route("/:id")
     );
 
 module.exports = JobRouter;
-
-// Extra----------------------------
-// JobRouter.get("/", JobController.getAllJobs); //Get all jobs
-JobRouter.post("/", JobController.addJob); //Add all jobs
-// JobRouter.get("/:id", JobController.getSingleJob); //Get Single all jobs
