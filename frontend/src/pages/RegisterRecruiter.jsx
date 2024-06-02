@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { MetaData } from '../components/MetaData';
-import { AiOutlineMail, AiOutlineUnlock, AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import { MdPermIdentity, MdOutlineFeaturedPlayList } from 'react-icons/md';
-import { BsFileEarmarkText } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbLoader2 } from 'react-icons/tb';
 import { registerUser } from '../actions/UserActions';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const Register = () => {
+export const RegisterRecruiter = () => {
   const { loading, isLogin } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,13 +16,9 @@ export const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [skills, setSkills] = useState("");
 
   const [avatar, setAvatar] = useState("");
   const [avatarName, setAvatarName] = useState("");
-
-  const [resume, setResume] = useState("");
-  const [resumeName, setResumeName] = useState("");
 
   const avatarChange = (e) => {
     if (e.target.name === "avatar") {
@@ -41,35 +34,24 @@ export const Register = () => {
     }
   };
 
-  const resumeChange = (e) => {
-    if (e.target.name === "resume") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setResume(reader.result);
-          setResumeName(e.target.files[0].name);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
-
   const registerHandler = (e) => {
     e.preventDefault();
 
-    const skillsArr = skills.split(",");
     const data = {
-      name,
+      companyName: name,
       email,
       password,
-      avatar,
-      resume,
-      skills: skillsArr,
-      role: 'applicant'
+      companyLogo: avatar,
+      role: "recruiter",
     };
 
     dispatch(registerUser(data));
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setAvatar("");
+    setAvatarName("");
   };
 
   useEffect(() => {
@@ -87,11 +69,11 @@ export const Register = () => {
             <div className="w-full max-w-xl space-y-8">
               <div className="flex justify-between items-center mb-8 w-full">
                 <div className="text-left">
-                  <h2 className="text-left text-3xl font-bold text-red-800">Register as Applicant</h2>
+                  <h2 className="text-left text-3xl font-bold text-red-800">Register as Recruiter</h2>
                   <p className="text-gray-600 font-semibold">Already have an account? <Link to="/login" className="text-red-800">Login now</Link></p>
                 </div>
                 <div>
-                  <p className="text-right text-gray-600 font-semibold">Register as <Link to="/register-recruiter" className="text-red-800">Recruiter?</Link></p>
+                  <p className="text-right text-gray-600 font-semibold">Register as <Link to="/register" className="text-red-800">Applicant?</Link></p>
                 </div>
               </div>
               <form onSubmit={registerHandler} className="space-y-6 w-full">
@@ -104,7 +86,7 @@ export const Register = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:border-maroon-500"
-                    placeholder="Full Name"
+                    placeholder="Company / Organization Name"
                   />
                 </div>
                 <div className="relative">
@@ -134,24 +116,10 @@ export const Register = () => {
                     {eyeTog ? <AiOutlineEye size={20} /> : <AiOutlineEyeInvisible size={20} />}
                   </div>
                 </div>
-                <div className="relative">
-                  <textarea
-                    id="skills"
-                    name="skills"
-                    value={skills}
-                    onChange={(e) => setSkills(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:border-maroon-500"
-                    placeholder="Skills"
-                  ></textarea>
-                </div>
                 <div className="flex space-x-4">
                   <label htmlFor="avatar" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
                     {avatarName.length === 0 ? 'Upload Profile Picture' : avatarName}
                     <input id="avatar" name="avatar" type="file" accept="image/*" className="hidden" onChange={avatarChange} />
-                  </label>
-                  <label htmlFor="resume" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
-                    {resumeName.length === 0 ? 'Upload Resume / CV' : resumeName}
-                    <input id="resume" name="resume" type="file" accept="application/pdf" className="hidden" onChange={resumeChange} />
                   </label>
                 </div>
                 <div>

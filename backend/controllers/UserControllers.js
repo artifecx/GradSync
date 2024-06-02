@@ -58,7 +58,8 @@ exports.register = async (req, res) => {
             resume: {
                 public_id: myCloud2.public_id,
                 url: myCloud2.secure_url
-            }
+            },
+            role: 'applicant'
         })
 
         const token = createToken(user._id, user.email)

@@ -34,6 +34,7 @@ import { EditJobAdmin } from './pages/EditJobAdmin'
 import { Test } from './pages/Test'
 import NotFound from './pages/NotFound'
 import UnAuthorized from './pages/UnAuthorized'
+import { RegisterRecruiter } from './pages/RegisterRecruiter'
 
 
 
@@ -68,7 +69,6 @@ function App() {
     return children ? children : <Outlet />
   }
 
-
   return (
     <>
 
@@ -81,6 +81,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/register-recruiter' element={<RegisterRecruiter />} />
         <Route path='/details/:id' element={<JobDetails />} />
 
         <Route element={<ProtectedRoute isAllowed={['applicant', 'admin'].includes(localStorage.getItem('role'))} />}>
@@ -93,7 +94,6 @@ function App() {
           <Route path='/JobsLayout' element={<JobsLayout />} />
           <Route path='/Application/:id' element={<Application />} />
           <Route path='/Application/Details/:id' element={<ApplicationDetails />} />
-
         </Route>
 
         <Route element={<ProtectedRoute isAllowed={"admin" === localStorage.getItem('role')} />}>
