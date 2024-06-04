@@ -4,6 +4,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbLoader2 } from 'react-icons/tb';
 import { registerRecruiter } from '../actions/UserActions'; // Updated import
+import { registerRecruiter } from '../actions/UserActions'; // Updated import
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import backgroundImage from "../assets/loginBG.png";
@@ -42,6 +43,8 @@ export const RegisterRecruiter = () => {
     const data = {
       name: recruiterName, // Changed to recruiterName
       password,
+      companyName,
+      name: recruiterName, // Changed to recruiterName
       companyName,
       email,
       password,
@@ -243,5 +246,7 @@ export const RegisterRecruiter = () => {
     </>
   );
 };
+
+export default RegisterRecruiter;
 
 export default RegisterRecruiter;

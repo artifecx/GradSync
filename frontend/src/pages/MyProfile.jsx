@@ -29,20 +29,20 @@ export const MyProfile = () => {
   return (
     <>
       <MetaData title="My Profile" />
-      <div className="bg-white min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]">
+      <div className="bg-[#F1F2F4] min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]">
         {loading ? (
           <Loader />
         ) : (
           <>
             <div className="text-left text-3xl absolute pl-4 underline-offset-8 md:pt-6 pt-3">
-              <span className="font-medium">My Profile</span>
+              <span className="font-medium">{me.role !== 'recruiter' ? "My Profile" : "Company Profile"}</span>
             </div>
 
             <div className="flex md:flex-row flex-col md:gap-12 justify-between items-top md:pt-12 border-blue-500 min-h-[90vh]">
               {/* Profile Picture Section */}
               <div className="md:w-1/3 w-full md:pb-0 pt-16 md:pt-10 gap-8 flex flex-col justify-start items-center">
                 <div className="w-72 h-72 flex md:justify-center justify-start items-center">
-                  <img src={me.avatar.url} className="rounded-full w-full h-full" alt="" />
+                  <img src={me?.role === 'recruiter' ?  me?.companyLogo?.url : me?.avatar?.url} className="rounded-full w-full h-full" alt="" />
                 </div>
                 <div className="flex justify-center items-center">
                   <Link to="/editProfile" className="bg-[#7A1515] px-10 py-2 font-semibold text-white rounded-[5px]">
@@ -55,8 +55,8 @@ export const MyProfile = () => {
               <div className="md:w-1/3 w-full md:px-0 px-4 pb-20 md:pt-4 pt-8">
                 <div className="flex flex-col md:gap-5 gap-6">
                   <div>
-                    <p className="md:text-2xl text-xl text-black font-bold">Full Name</p>
-                    <p className="md:text-xl pt-1 text-lg">{me.name}</p>
+                    <p className="md:text-2xl text-xl text-black font-bold">{me.role !== 'recruiter' ? "Full Name" : "Company Name"}</p>
+                    <p className="md:text-xl pt-1 text-lg">{me.role !== 'recruiter' ? me.name : me.companyName}</p>
                   </div>
                   <div>
                     <p className="md:text-2xl text-xl text-black font-bold">Email</p>
@@ -66,7 +66,7 @@ export const MyProfile = () => {
                     <p className="md:text-2xl text-xl text-black font-bold">Joined On</p>
                     <p className="md:text-xl pt-1 text-lg">{convertDateFormat(me.createdAt.substr(0, 10))}</p>
                   </div>
-                  {me.role !== 'admin' && (
+                  {me.role === 'applicant' && (
                     <div>
                       <p className="md:text-2xl text-xl text-black font-bold">Skills</p>
                       <div className="md:text-xl text-lg pt-3 flex gap-3 flex-wrap">
@@ -88,7 +88,7 @@ export const MyProfile = () => {
               {/* Buttons Section */}
               <div className="md:w-1/3 w-full md:pt-4 pt-8">
                 <ul className="flex flex-col gap-4">
-                  {me.role !== 'admin' && (
+                  {me.role === 'applicant' && (
                     <>
                       <li>
                         <button onClick={open} className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
@@ -131,7 +131,7 @@ export const MyProfile = () => {
 
             <Modal opened={opened} onClose={close} title="Resume">
               <div>
-                <img src={me.resume.url} className="w-full h-full" alt="" />
+                <img src={me?.resume?.url} className="w-full h-full" alt="" />
               </div>
             </Modal>
           </>

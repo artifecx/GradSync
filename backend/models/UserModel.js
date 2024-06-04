@@ -19,6 +19,16 @@ const userSchema = new mongoose.Schema({
         enum: ['admin', 'recruiter', 'applicant'],
         required: true
     },
+    avatar: {
+        public_id: {
+            type: String,
+            required: function() { return this.role === 'applicant' || this.role === 'admin'; }
+        },
+        url: {
+            type: String,
+            required: function() { return this.role === 'applicant' || this.role === 'admin'; }
+        },
+    },
     companyName: {
         type: String,
         required: function() { return this.role === 'recruiter'; }

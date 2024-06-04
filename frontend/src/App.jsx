@@ -84,7 +84,7 @@ function App() {
         <Route path='/register-recruiter' element={<RegisterRecruiter />} />
         <Route path='/details/:id' element={<JobDetails />} />
 
-        <Route element={<ProtectedRoute isAllowed={['applicant', 'admin'].includes(localStorage.getItem('role'))} />}>
+        <Route element={<ProtectedRoute isAllowed={['applicant', 'recruiter', 'admin'].includes(localStorage.getItem('role'))} />}>
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/applied' element={<AppliedJobs />} />
           <Route path='/saved' element={<SavedJobs />} />
@@ -96,7 +96,7 @@ function App() {
           <Route path='/Application/Details/:id' element={<ApplicationDetails />} />
         </Route>
 
-        <Route element={<ProtectedRoute isAllowed={"admin" === localStorage.getItem('role')} />}>
+        <Route element={<ProtectedRoute isAllowed={['recruiter', 'admin'].includes(localStorage.getItem('role'))} />}>
           <Route path='/admin/dashboard' element={<Dashboard />} />
           <Route path='/admin/postJob' element={<CreateJob />} />
           <Route path='/admin/allJobs' element={<ViewAllJobAdmin />} />
