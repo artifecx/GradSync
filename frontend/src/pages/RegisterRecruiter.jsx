@@ -19,7 +19,6 @@ export const RegisterRecruiter = () => {
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [companyLogo, setCompanyLogo] = useState(""); // Changed to companyLogo
   const [companyLogoName, setCompanyLogoName] = useState(""); // Changed to companyLogoName
 
@@ -42,6 +41,7 @@ export const RegisterRecruiter = () => {
 
     const data = {
       name: recruiterName, // Changed to recruiterName
+      password,
       companyName,
       email,
       password,
