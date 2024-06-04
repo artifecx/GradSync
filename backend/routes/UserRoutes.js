@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const { register, signupRecruiter, login, isLogin, me, changePassword, updateProfile, deleteAccount } = require('../controllers/UserControllers');
+const express = require('express')
+const { register, signUpRecruiter, login, isLogin, me, changePassword, updateProfile, deleteAccount } = require('../controllers/UserControllers');
 const { isAuthenticated } = require('../middlewares/auth');
 const { registerValidator, validateHandler, loginValidator, changePasswordValidator, updateProfileValidator, deleteAccountValidator, recruiterValidator } = require('../middlewares/validators');
+const router = express.Router()
 
 router.post("/register", registerValidator(), validateHandler, register);
-router.post('/signup/recruiter', recruiterValidator(), validateHandler, signupRecruiter);
+router.post('/signup/recruiter', recruiterValidator(), validateHandler, signUpRecruiter);
 router.post("/login", loginValidator(), validateHandler, login);
 router.get("/isLogin", isAuthenticated, isLogin);
 router.get("/me", isAuthenticated, me);

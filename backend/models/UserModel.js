@@ -42,7 +42,17 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    avatar: {
+        public_id: {
+            type: String,
+            required: function() { return this.role === 'applicant' || this.role === 'admin'; }
+        },
+        url: {
+            type: String,
+            required: function() { return this.role === 'applicant' || this.role === 'admin'; }
+        },
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);
