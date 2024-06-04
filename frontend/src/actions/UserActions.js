@@ -9,6 +9,24 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 
+export const registerRecruiter = (userData) => async (dispatch) => {
+    try {
+        dispatch(registerRequest());
+
+        const { data } = await axios.post("https://gradsync-backend.vercel.app/api/v1/signup/recruiter", userData);
+
+        dispatch(registerSuccess());
+        localStorage.setItem('userToken', data.token); 
+        toast.success("Registration successful !");
+    } catch (err) {
+        dispatch(registerFail(err.response.data.message));
+        if (err.response.data.message.includes("duplicate")) {
+            toast.error("User already exists.");
+        } else {
+            toast.error(err.response.data.message);
+        }
+    }
+}
 
 export const registerUser = (userData) => async (dispatch) => {
     try {
@@ -30,6 +48,8 @@ export const registerUser = (userData) => async (dispatch) => {
         }
     }
 }
+
+
 
 
 export const loginUser = (userData) => async (dispatch) => {

@@ -1,18 +1,16 @@
-const express = require('express')
-const { register, signupRecruiter, login, isLogin, me, changePassword, updateProfile, deleteAccount } = require('../controllers/UserControllers')
-const {isAuthenticated} = require('../middlewares/auth');
-const { registerValidator, validateHandler,loginValidator ,changePasswordValidator ,updateProfileValidator,deleteAccountValidator} = require('../middlewares/validators');
-const router = express.Router() 
+const express = require('express');
+const router = express.Router();
+const { register, signupRecruiter, login, isLogin, me, changePassword, updateProfile, deleteAccount } = require('../controllers/UserControllers');
+const { isAuthenticated } = require('../middlewares/auth');
+const { registerValidator, validateHandler, loginValidator, changePasswordValidator, updateProfileValidator, deleteAccountValidator, recruiterValidator } = require('../middlewares/validators');
 
+router.post("/register", registerValidator(), validateHandler, register);
+router.post('/signup/recruiter', recruiterValidator(), validateHandler, signupRecruiter);
+router.post("/login", loginValidator(), validateHandler, login);
+router.get("/isLogin", isAuthenticated, isLogin);
+router.get("/me", isAuthenticated, me);
+router.put("/changePassword", isAuthenticated, changePasswordValidator(), validateHandler, changePassword);
+router.put("/updateProfile", isAuthenticated, updateProfileValidator(), validateHandler, updateProfile);
+router.put("/deleteAccount", isAuthenticated, deleteAccountValidator(), validateHandler, deleteAccount);
 
-router.route("/register").post(registerValidator(),validateHandler,register) ;
-router.post('/signup/recruiter', signupRecruiter);
-router.route("/login").post(loginValidator(),validateHandler,login) ;
-router.route("/isLogin").get(isAuthenticated, isLogin) ; 
-router.route("/me").get(isAuthenticated, me) ; 
-router.route("/changePassword").put(isAuthenticated,changePasswordValidator(),validateHandler, changePassword) ; 
-router.route("/updateProfile").put(isAuthenticated,updateProfileValidator(),validateHandler, updateProfile) ; 
-router.route("/deleteAccount").put(isAuthenticated,deleteAccountValidator(),validateHandler, deleteAccount) ; 
-
-
-module.exports = router
+module.exports = router;

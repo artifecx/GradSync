@@ -3,7 +3,7 @@ import { MetaData } from '../components/MetaData';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbLoader2 } from 'react-icons/tb';
-import { registerUser } from '../actions/UserActions';
+import { registerRecruiter } from '../actions/UserActions'; // Updated import
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import backgroundImage from "../assets/loginBG.png";
@@ -15,20 +15,21 @@ export const RegisterRecruiter = () => {
 
   const [eyeTog, setEyeTog] = useState(false);
 
-  const [name, setName] = useState("");
+  const [recruiterName, setRecruiterName] = useState(""); // Changed to recruiterName
+  const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [avatar, setAvatar] = useState("");
-  const [avatarName, setAvatarName] = useState("");
+  const [companyLogo, setCompanyLogo] = useState(""); // Changed to companyLogo
+  const [companyLogoName, setCompanyLogoName] = useState(""); // Changed to companyLogoName
 
-  const avatarChange = (e) => {
-    if (e.target.name === "avatar") {
+  const companyLogoChange = (e) => { // Changed to companyLogoChange
+    if (e.target.name === "companyLogo") { // Changed to companyLogo
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setAvatar(reader.result);
-          setAvatarName(e.target.files[0].name);
+          setCompanyLogo(reader.result);
+          setCompanyLogoName(e.target.files[0].name);
         }
       };
 
@@ -40,20 +41,22 @@ export const RegisterRecruiter = () => {
     e.preventDefault();
 
     const data = {
-      companyName: name,
+      name: recruiterName, // Changed to recruiterName
+      companyName,
       email,
       password,
-      companyLogo: avatar,
+      companyLogo,
       role: "recruiter",
     };
 
-    dispatch(registerUser(data));
+    dispatch(registerRecruiter(data)); // Changed to registerRecruiter
 
-    setName("");
+    setRecruiterName(""); // Changed to setRecruiterName
+    setCompanyName("");
     setEmail("");
     setPassword("");
-    setAvatar("");
-    setAvatarName("");
+    setCompanyLogo("");
+    setCompanyLogoName("");
   };
 
   useEffect(() => {
@@ -79,12 +82,44 @@ export const RegisterRecruiter = () => {
             </div>
 
             <TextField
-              id="name"
-              name="name"
+              id="recruiterName" // Changed to recruiterName
+              name="recruiterName" // Changed to recruiterName
+              label="Recruiter Name" // Changed to Recruiter Name
+              required
+              value={recruiterName} // Changed to recruiterName
+              onChange={(e) => setRecruiterName(e.target.value)} // Changed to setRecruiterName
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#991b1b',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontWeight: '400',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#991b1b',
+                  fontWeight: '600',
+                },
+                '& .MuiInputLabel-root.MuiFormLabel-filled': {
+                  fontWeight: '600',
+                },
+              }}
+            />
+
+            <TextField
+              id="companyName"
+              name="companyName"
               label="Company / Organization Name"
               required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               fullWidth
               variant="outlined"
               margin="normal"
@@ -188,9 +223,9 @@ export const RegisterRecruiter = () => {
             />
 
             <div className='flex space-x-4 mb-6 mt-4'>
-              <label htmlFor="avatar" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
-                {avatarName.length === 0 ? 'Upload Company Logo' : avatarName}
-                <input id="avatar" name="avatar" type="file" accept="image/*" className="hidden" onChange={avatarChange} />
+              <label htmlFor="companyLogo" className="w-full cursor-pointer bg-white font-bold text-red-900 px-3 py-2 border border-red-800 rounded-sm shadow-sm hover:bg-yellow-500 focus:outline-none focus:border-red-900 text-center">
+                {companyLogoName.length === 0 ? 'Upload Company Logo' : companyLogoName}
+                <input id="companyLogo" name="companyLogo" type="file" accept="image/*" className="hidden" onChange={companyLogoChange} />
               </label>
             </div>
 
@@ -208,3 +243,5 @@ export const RegisterRecruiter = () => {
     </>
   );
 };
+
+export default RegisterRecruiter;

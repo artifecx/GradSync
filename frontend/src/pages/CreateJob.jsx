@@ -214,8 +214,6 @@ export const CreateJob = () => {
               <div className='flex gap-3'>
                 {/* Category */}
                 <div className='bg-white flex justify-center items-center'>
-
-
                   <select required onChange={(e) => setCategory(e.target.value)} value={category} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                     <option selected value="">Select Category</option>
                     <option value="Technology">Technology</option>
@@ -226,11 +224,8 @@ export const CreateJob = () => {
                   </select>
                 </div>
 
-
                 {/* Employment Type */}
                 <div className='bg-white flex justify-center items-center'>
-
-
                   <select required onChange={(e) => setEmploymentType(e.target.value)} value={employmentType} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                     <option selected value="">Select Employment Type</option>
                     <option value="full-time">Full-time</option>
@@ -238,29 +233,16 @@ export const CreateJob = () => {
                     <option value="contract">Contract</option>
                     <option value="internship">Internship</option>
                   </select>
-
-
-
-
                 </div>
-
-
               </div>
-              <div className='flex w-full'>
 
+              <div className='flex w-full'>
                 <button className='blueCol w-[20rem] justify-center items-center flex px-4 py-2'>
                   {loading ? <TbLoader2 className='animate-spin' size={24} /> : "Post Job"}
                 </button>
-
               </div>
-
-
             </div>
-
           </form>
-
-
-
 
           <form onSubmit={postHandler} className=' md:hidden flex md:w-1/3 shadow-gray-700  w-full md:mx-0 mx-8' action="">
 
@@ -279,8 +261,6 @@ export const CreateJob = () => {
                   required placeholder='Job Title' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
               </div>
 
-
-
               {/* Job Description */}
               <div className='bg-white flex justify-center items-center'>
                 <div className='text-gray-600 md:pb-12 pb-8 px-2'>
@@ -292,8 +272,6 @@ export const CreateJob = () => {
                   placeholder='Job Description' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
               </div>
 
-
-
               {/* Company Name */}
               <div className='bg-white flex justify-center items-center'>
                 <div className='text-gray-600 px-2'>
@@ -303,8 +281,6 @@ export const CreateJob = () => {
                   value={companyName} onChange={(e) => setCompanyName(e.target.value)}
                   required placeholder='Company Name' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
               </div>
-
-
 
               {/* Company Logo */}
               <div>
@@ -324,11 +300,8 @@ export const CreateJob = () => {
                     onChange={logoChange}
                     placeholder='Logo' accept="image/*" type="file" className='outline-none  w-full hidden text-black px-1 pr-3 py-2' />
 
-
                 </div>
               </div>
-
-
 
               {/* Location */}
               <div className='bg-white flex justify-center items-center'>
@@ -350,7 +323,6 @@ export const CreateJob = () => {
                   placeholder='Required Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
               </div>
 
-
               {/* Experience */}
               <div className='bg-white flex justify-center items-center'>
                 <div className='text-gray-600 px-2'>
@@ -361,11 +333,8 @@ export const CreateJob = () => {
                   required placeholder='Experience' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
               </div>
 
-
               {/* Category */}
               <div className='bg-white flex justify-center items-center'>
-
-
                 <select required onChange={(e) => setCategory(e.target.value)} value={category} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                   <option selected value="">Select Category</option>
                   <option value="full-time">Technology</option>
@@ -376,23 +345,18 @@ export const CreateJob = () => {
                 </select>
               </div>
 
-
               {/* Salary */}
               <div className='bg-white flex justify-center items-center'>
                 <div className='text-gray-600 px-2'>
                   <MdAttachMoney size={20} />
                 </div>
-
                 <input
                   value={salary} onChange={(e) => setSalary(e.target.value)}
                   required placeholder='Salary' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
               </div>
 
-
               {/* Employment Type */}
               <div className='bg-white flex justify-center items-center'>
-
-
                 <select required onChange={(e) => setEmploymentType(e.target.value)} value={employmentType} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                   <option selected value="">Select Employment Type</option>
                   <option value="full-time">Full-time</option>
@@ -400,37 +364,16 @@ export const CreateJob = () => {
                   <option value="contract">Contract</option>
                   <option value="internship">Internship</option>
                 </select>
-
-
-
-
               </div>
-
-
-
-
-
-
-
-
 
               <div>
                 <button disabled={loading} className='blueCol flex justify-center items-center px-8 w-full py-2 font-semibold' >
                   {loading ? <TbLoader2 className='animate-spin' size={24} /> : "Post Job"}</button>
               </div>
-
             </div>
-
-
-
           </form>
-
         </div>
-
-
       </div>
-
-
     </>
   )
 }
