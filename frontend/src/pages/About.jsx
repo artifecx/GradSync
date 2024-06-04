@@ -5,7 +5,7 @@ export const About = () => {
   return (
     <>
       <MetaData title="About" />
-      <div className='bg-white min-h-screen pt-14 md:px-20 px-3 text-#7A1515'>
+      <div className='bg-[#F1F2F4] min-h-screen pt-14 md:px-20 px-3 text-#7A1515'>
 
                 <div className='flex flex-col gap-5 md:px-0 px-2 md:pt-8 pt-4 pb-20'>
                     <div>

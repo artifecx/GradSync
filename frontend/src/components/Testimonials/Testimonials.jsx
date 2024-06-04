@@ -43,7 +43,7 @@ function Testimonials() {
         <div className='absolute left-[-30px] top-1/2 transform -translate-y-1/2'>
           <button 
             onClick={handlePrev} 
-            className='bg-transparent text-white p-2 rounded-full z-10 hover:bg-gray-700 transition duration-300'
+            className='bg-transparent text-[#743030] p-2 rounded-full z-10 hover:bg-[#FFBF03] transition duration-300'
           >
             {/* React Icons Left Arrow */}
             <FaChevronLeft size={35} />
@@ -70,7 +70,7 @@ function Testimonials() {
         <div className='absolute right-[-35px] top-1/2 transform -translate-y-1/2'>
           <button 
             onClick={handleNext} 
-            className='bg-transparent text-white p-2 rounded-full z-10 hover:bg-gray-700 transition duration-300'
+            className='bg-transparent text-[#743030] p-2 rounded-full z-10 hover:bg-[#FFBF03] transition duration-300'
           >
             {/* React Icons Right Arrow */}
             <FaChevronRight size={35} />

@@ -44,7 +44,7 @@ export const DeleteAccount = () => {
         <>
 
             <MetaData title="Change Password" />
-            <div className='bg-gray-950 min-h-screen pt-14  md:px-20 px-3  text-white'>
+            <div className='bg-[#F1F2F4] min-h-screen pt-14  md:px-20 px-3  text-[#7A1515]'>
 
 
                 <div>
@@ -78,7 +78,7 @@ export const DeleteAccount = () => {
 
 
                                 <div>
-                                    <button disabled={loading || !confirm} className='blueCol px-8 w-full py-2 flex justify-center items-center font-semibold' >{loading ? <TbLoader2 className='animate-spin' size={24} /> : "Delete"}</button>
+                                    <button disabled={loading || !confirm} className='bg-[#7A1515] text-white px-8 w-full py-2 flex justify-center items-center font-semibold' >{loading ? <TbLoader2 className='animate-spin bg-[#7A1515]' size={24} /> : "Delete"}</button>
                                 </div>
 
 

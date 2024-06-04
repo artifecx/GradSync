@@ -29,7 +29,7 @@ export const MyProfile = () => {
   return (
     <>
       <MetaData title="My Profile" />
-      <div className="bg-white min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]">
+      <div className="bg-[#F1F2F4] min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]">
         {loading ? (
           <Loader />
         ) : (
