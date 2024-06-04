@@ -4,26 +4,41 @@ const { createToken } = require('../middlewares/auth')
 const cloudinary = require('cloudinary')
 
 
-exports.signupRecruiter = async (req, res, next) => {
-    const { name, email, password, companyName, companyLogo } = req.body;
-
+exports.signUpRecruiter = async (req, res) => {
     try {
+        const { name, email, password, companyName, companyLogo } = req.body;
+
+        const myCloud = await cloudinary.v2.uploader.upload(companyLogo, {
+            folder: 'companyLogo',
+            crop: "scale",
+        });
+
+        const hashPass = await bcrypt.hash(password, 10);
         const user = await User.create({
             name,
             email,
-            password,
-            role: 'recruiter',
+            password: hashPass,
+            role: 'recruiter', // Set the role to "recruiter"
             companyName,
-            companyLogo
+            companyLogo: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
         });
 
-        // Add token generation and response logic
+        const token = createToken(user._id, user.email);
+
         res.status(201).json({
             success: true,
-            data: user
+            message: "Recruiter Created",
+            user,
+            token
         });
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
     }
 };
 
@@ -77,7 +92,6 @@ exports.register = async (req, res) => {
         })
     }
 }
-
 
 exports.login = async (req, res) => {
     try {

@@ -16,6 +16,14 @@ exports.registerValidator = () => [
     body('resume').notEmpty().withMessage('Please enter resume')
 ];
 
+exports.recruiterValidator = () => [
+    body('name').notEmpty().withMessage('Please enter company name'),
+    body('companyName').notEmpty().withMessage('Please enter company name'),
+    body('email').isEmail().withMessage('Please enter a valid email'),
+    body('password').notEmpty().withMessage('Please enter password'),
+    body('companyLogo').notEmpty().withMessage('Please enter avatar'),
+];
+
 exports.loginValidator = () => [
     body('email').isEmail().withMessage('Please enter a valid email'),
     body('password').notEmpty().withMessage('Please enter password')
