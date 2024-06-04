@@ -37,7 +37,7 @@ export const Navbar = () => {
                     </Link>
 
                     <Link to="/" className='cool-link text-[#743030]'>Home</Link>
-                    <Link to="/jobs" className='cool-link text-[#743030]'>Find Job</Link>
+                    {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/jobs" className='cool-link text-[#743030]'>Find Job</Link>}
                     <Link to='/contact' className='cool-link text-[#743030]'>Contact</Link>
                     <Link to='/about' className='cool-link text-[#743030]'>About</Link>
 
@@ -49,9 +49,9 @@ export const Navbar = () => {
 
                             <Menu.Dropdown>
                                 <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>
-                                {me.role === "admin" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
-                                {me.role !== "admin" && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
-                                {me.role !== "admin" && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
+                                {me?.role !== "applicant" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
+                                {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
+                                {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
                                 <Menu.Divider />
                                 <Menu.Item onClick={LogOut} color="red" icon={<RiLogoutBoxFill size={14} />}>Logout</Menu.Item>
                             </Menu.Dropdown>
@@ -73,14 +73,14 @@ export const Navbar = () => {
                             {isLogin ? (
                                 <Menu shadow="md" width={200}>
                                     <Menu.Target>
-                                        <Avatar size={28} className='cursor-pointer' radius="xl" src={me.avatar.url} alt="it's me" />
+                                        <Avatar size={28} className='cursor-pointer' radius="xl" src={me?.role === 'recruiter' ?  me?.companyLogo?.url : me?.avatar?.url} alt="it's me" />
                                     </Menu.Target>
 
                                     <Menu.Dropdown>
                                         <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>
-                                        {me.role === "admin" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
-                                        {me.role !== "admin" && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
-                                        {me.role !== "admin" && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
+                                        {me?.role !== "applicant" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
+                                        {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
+                                        {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
                                         <Menu.Divider />
                                         <Menu.Item onClick={LogOut} color="red" icon={<RiLogoutBoxFill size={14} />}>Logout</Menu.Item>
                                     </Menu.Dropdown>
