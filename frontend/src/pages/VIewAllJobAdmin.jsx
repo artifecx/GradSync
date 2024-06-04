@@ -38,7 +38,6 @@ export const ViewAllJobAdmin = () => {
     dispatch(deleteJobData(id))
   }
 
-
   return (
     <>
 
@@ -104,7 +103,7 @@ export const ViewAllJobAdmin = () => {
                             {job.title}
                           </td>
                           <td className="px-6 py-4">
-                            {job.companyName}
+                            {job.postedBy.companyName}
                           </td>
                           <td className="px-6 py-4">
                             {job.location}

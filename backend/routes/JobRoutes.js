@@ -5,7 +5,7 @@ const {jobValidator,validateHandler,JobIdValidator } = require('../middlewares/v
 const router = express.Router()
 
 
-router.route("/create/job").post(isAuthenticated, authorizationRoles("admin") ,jobValidator(),validateHandler, createJob)
+router.route("/create/job").post(isAuthenticated, authorizationRoles("admin", "recruiter") ,jobValidator(),validateHandler, createJob)
 
 router.route("/jobs").get(allJobs) ;
 

@@ -22,9 +22,6 @@ export const Login = () => {
     const data = { email, password };
 
     dispatch(loginUser(data));
-
-    setEmail("");
-    setPassword("");
   };
 
   useEffect(() => {

@@ -11,10 +11,10 @@ exports.createJob = async (req, res) => {
     try {
         const user = await User.findById(userId);
 
-        if (user.role !== 'recruiter') {
+        if (user.role === 'applicant') {
             return res.status(403).json({ success: false, message: 'Only recruiters can add job listings' });
         }
-
+        
         const job = await Job.create({
             title,
             description,
@@ -24,7 +24,12 @@ exports.createJob = async (req, res) => {
             employmentType,
             experience,
             salary,
-            postedBy: userId
+            postedBy: userId,
+            companyName: user.role === 'admin' ? 'admin' : user.companyName,
+            companyLogo: {
+                public_id: user.role === 'admin' ? user.avatar.public_id : user.companyLogo.public_id,
+                url: user.role === 'admin' ? user.avatar.url : user.companyLogo.url
+            },
         });
 
         res.status(201).json({
@@ -32,7 +37,10 @@ exports.createJob = async (req, res) => {
             data: job
         });
     } catch (error) {
-        next(error);
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }
 

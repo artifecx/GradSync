@@ -20,60 +20,30 @@ export const CreateJob = () => {
 
   const dispatch = useDispatch()
 
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [companyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("");
   const [skillsRequired, setSkillsRequired] = useState("");
-  const [experience, setExperience] = useState("");
-  const [salary, setSalary] = useState("");
   const [category, setCategory] = useState("");
   const [employmentType, setEmploymentType] = useState("");
-
-  const [logo, setLogo] = useState("");
-  const [logoName, setLogoName] = useState("");
-
-
-
-
-
-
-
-  const logoChange = (e) => {
-    if (e.target.name === "logo") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setLogo(reader.result);
-          setLogoName(e.target.files[0].name)
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
-
-
+  const [experience, setExperience] = useState("");
+  const [salary, setSalary] = useState("");
 
   const postHandler = (e) => {
     e.preventDefault()
     const skillsArr = skillsRequired.split(",")
-    const data = { title, description, companyName, location, logo, skillsRequired: skillsArr, experience, salary, category, employmentType }
+    const data = { title, description, location, skillsRequired: skillsArr, experience, salary, category, employmentType }
 
     dispatch(createJobPost(data))
 
-    setTitle("");
-    setDescription("");
-    setCompanyName("");
-    setLocation("");
-    setSalary("");
-    setExperience("");
-    setSkillsRequired("")
-    setCategory("");
-    setEmploymentType("");
-    setLogo("");
-    setLogoName("")
+    // setTitle("");
+    // setDescription("");
+    // setLocation("");
+    // setSalary("");
+    // setExperience("");
+    // setSkillsRequired("")
+    // setCategory("");
+    // setEmploymentType("");
   }
 
 
@@ -110,43 +80,6 @@ export const CreateJob = () => {
                   <input
                     value={title} onChange={(e) => setTitle(e.target.value)}
                     required placeholder='Job Title' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-                </div>
-
-
-
-                {/* Company Name */}
-                <div className='bg-white flex justify-center items-center'>
-                  <div className='text-gray-600 px-2'>
-                    <BiBuilding size={20} />
-                  </div>
-                  <input
-                    value={companyName} onChange={(e) => setCompanyName(e.target.value)}
-                    required placeholder='Company Name' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-                </div>
-
-
-
-                {/* Company Logo */}
-                <div>
-                  <div className='bg-white flex w-[15.2rem] justify-center items-center'>
-                    <div className='text-gray-600 px-2'>
-                      {
-                        logo.length !== 0 ?
-                          <img src={logo} className='w-[3em]' alt="" /> :
-                          <BiImageAlt size={20} />
-                      }
-                    </div>
-                    <label htmlFor='logo' className='outline-none w-full cursor-pointer text-black px-1 pr-3 py-2 '>
-                      {logoName.length === 0 ? <span className='text-gray-500 font-medium'>Select Company Logo...</span>
-                        : logoName}
-                    </label>
-                    <input id='logo' name='logo' required
-                      onChange={logoChange}
-                      placeholder='Logo' accept="image/*" type="file" className='outline-none  w-full hidden text-black px-1 pr-3 py-2' />
-
-
-                  </div>
-                  {/* <p className='bg-gray-950 text-white text-xs'>Please select Image file</p> */}
                 </div>
 
               </div>
@@ -270,37 +203,6 @@ export const CreateJob = () => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder='Job Description' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
-              </div>
-
-              {/* Company Name */}
-              <div className='bg-white flex justify-center items-center'>
-                <div className='text-gray-600 px-2'>
-                  <BiBuilding size={20} />
-                </div>
-                <input
-                  value={companyName} onChange={(e) => setCompanyName(e.target.value)}
-                  required placeholder='Company Name' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-              </div>
-
-              {/* Company Logo */}
-              <div>
-                <div className='bg-white flex justify-center items-center'>
-                  <div className='text-gray-600 px-2'>
-                    {
-                      logo.length !== 0 ?
-                        <img src={logo} className='w-[3em]' alt="" /> :
-                        <BiImageAlt size={20} />
-                    }
-                  </div>
-                  <label htmlFor='logo' className='outline-none w-full cursor-pointer text-black px-1 pr-3 py-2 '>
-                    {logoName.length === 0 ? <span className='text-gray-500 font-medium'>Select Company Logo...</span>
-                      : logoName}
-                  </label>
-                  <input id='logo' name='logo' required
-                    onChange={logoChange}
-                    placeholder='Logo' accept="image/*" type="file" className='outline-none  w-full hidden text-black px-1 pr-3 py-2' />
-
-                </div>
               </div>
 
               {/* Location */}

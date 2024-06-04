@@ -54,6 +54,10 @@ export const JobDetails = () => {
     } 
   }
 
+  const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+  }
+
   return (
     <>
 
@@ -69,16 +73,13 @@ export const JobDetails = () => {
 
             {jobDetails && <div>
               <div className='flex pt-5 md:px-12 pl-4 md:gap-10 gap-5'>
-                {/* <div className=''> */}
-                  {/* <img src={jobDetails && jobDetails.companyLogo.url} className='md:h-32 h-24 w-24 md:w-32' alt="" /> */}
-                {/* </div> */}
-                <div className='flex  items-center w-[6rem]'>
-                  <img src={jobDetails && jobDetails.companyLogo.url} className='' alt="" />
+                <div className='flex items-center w-[6rem]'>
+                  <img src={jobDetails && jobDetails.companyLogo.url} className='md:h-32 h-24 w-24 md:w-32' alt="" />
                 </div>
                 <div className='flex flex-col gap-2 md:pt-2'>
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
                   <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.companyName}</p>
-                  <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employmentType}</p>
+                  <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{capitalizeWords(jobDetails.employmentType)}</p>
                   <p className='text-lg flex gap-1.5 items-center  md:text-2xl'><HiStatusOnline size={20} /><span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} 
                   w-20 text-center rounded-lg font-semibold`} >
                     {jobDetails.status}
@@ -99,10 +100,10 @@ export const JobDetails = () => {
                     <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.postedBy.name}</div></li>
                     <li className='flex items-center gap-3'>Posted At: <div>{convertDateFormat(jobDetails.createdAt.substr(0, 10))}</div></li>
                     <li className='flex items-center gap-3'>Location: <div> {jobDetails.location}</div></li>
-                    <li className='flex items-center gap-3'>Salary: <div className='flex items-center' ><TbCurrencyPeso />  <span>{jobDetails.salary} LPA</span></div></li>
+                    <li className='flex items-center gap-3'>Salary: <div className='flex items-center' ><TbCurrencyPeso />  <span>{jobDetails.salary}</span></div></li>
                     <li className='flex items-center gap-3'>Experience: <div> {jobDetails.experience}</div></li>
                     <li className='flex items-center gap-3'>Skills Required: <div className='flex flex-wrap items-center gap-3'> {jobDetails.skillsRequired.map((e,i) => (<span key={i} className='px-2 py-0.5 bg-yellow-600 rounded text-black md:text-sm font-semibold text-xs'>{e}</span>))}                     </div></li>
-                    <li className='grid gird-cols-1 gap-2 pt-2'><div className='text-2xl'>Job Description: </div> <div> {jobDetails.description}</div></li>
+                    <li className='grid gird-cols-1 gap-2 pt-2'><div className='text-2xl' >Job Description: </div> <div style={{ whiteSpace: 'pre-wrap' }}> {jobDetails.description}</div></li>
                   </ul>
                 </div>
               </div>
