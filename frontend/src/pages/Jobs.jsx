@@ -71,35 +71,41 @@ export const Jobs = () => {
   return (
     <>
       <MetaData title="Jobs" />
-      <div className='bg-white min-h-screen pt-14 md:px-20 px-3 text-black'>
+      <div className='bg-white min-h-screen min-w-screen pt-14 text-black'>
         {loading ? <Loader /> : (
-          <div className='flex-col flex justify-center w-full'>
-            <div className='py-3 pt-4 w-full flex justify-center items-center'>
-              <div className='bg-white flex md:w-2/5 w-4/5 relative'>
-                <FiSearch size={19} className='text-black ml-2' />
-                <input
-                  value={search}
-                  onChange={(e) => searchHandler(e.target.value)}
-                  type="text"
-                  className='outline-none text-black w-full px-2 py-1'
-                  placeholder='Search by job title, position, keyword...'
-                />
-                <button
-                  className='absolute inset-y-0 right-0 flex items-center pr-2'
-                  onClick={() => setIsFilterModalOpen(true)}
-                >
-                  <FiFilter size={20} className='text-black' />
-                  <p className='text-black'>Filters</p>
-                </button>
-                {search && (
-                  <RxCross2
-                    size={19}
-                    onClick={() => setSearch('')}
-                    className='text-black mr-2 cursor-pointer'
-                  />
-                )}
+          <div className='flex-col flex justify-center w-screen'>
+            <div className='bg-[#7A1515] min-w-screen py-8'>
+              <div className='py-3 pt-4 w-full flex justify-center items-center'>
+                <div className='bg-white flex md:w-3/5 w-1/5 relative py-1.5 rounded-[7px]'>
+                  <div className='bg-white flex px-2 md:4/5 w-3/5'>
+                    <FiSearch size={20} className='text-black ml-4' />
+                    <input
+                      value={search}
+                      onChange={(e) => searchHandler(e.target.value)}
+                      type="text"
+                      className='outline-none text-black w-full px-2 py-1'
+                      placeholder='Search by job title, position, keyword...'
+                    />
+                    <div className='bg-white'>
+                    <button
+                      className=' rounded-[3px] bg-[#F1F2F4] p-1.5 flex items-end justify-end'
+                      onClick={() => setIsFilterModalOpen(true)}
+                    >
+                      <FiFilter size={20} className='text-black' />
+                      <p className='text-black'>Filters</p>
+                    </button>
+                    {search && (
+                      <RxCross2
+                        size={19}
+                        onClick={() => setSearch('')}
+                        className='text-black mr-2 cursor-pointer'
+                      />
+                    )}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+             </div> 
             <div className='self-center w-[60vw] text-left pt-4 md:text-3xl text-2xl font-bold'>
               Jobs Found
             </div>

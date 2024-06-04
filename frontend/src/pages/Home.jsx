@@ -104,7 +104,7 @@ export const Home = () => {
 
         <>
             <MetaData title="GradSync" />
-            <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-[#000000] bg-white'>
+            <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-[#000000] bg-[#F1F2F4]'>
             <div className='min-h-3 py-12'>
 
                 <div className="hero-content py-12 flex items-center justify-between">

@@ -109,7 +109,8 @@ font-family: 'Ubuntu', sans-serif; */
 
   .cool-link {
     display: inline-block;
-    color: #fff;
+    color: #743030 ;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -118,7 +119,7 @@ font-family: 'Ubuntu', sans-serif; */
     display: block;
     width: 0;
     height: 2px;
-    background: #EAB308 ;
+    background: #743030 ;
     transition: width .3s;
 }
 
