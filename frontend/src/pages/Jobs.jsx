@@ -107,9 +107,6 @@ export const Jobs = () => {
                 </div>
               </div>
              </div> 
-            <div className='self-center w-[60vw] text-left pt-4 md:text-3xl text-2xl font-bold'>
-              Jobs Found
-            </div>
             <Modal
               opened={isFilterModalOpen}
               onClose={() => setIsFilterModalOpen(false)}
@@ -142,6 +139,9 @@ export const Jobs = () => {
                 <button onClick={clearFilters} className='bg-gray-500 text-white p-2 mt-2'>Clear Filters</button>
               </div>
             </Modal>
+            <div className='self-center w-[60vw] text-left pt-4 md:text-3xl text-2xl font-bold'>
+              Jobs Found
+            </div>
             <div className='self-center w-[60vw] bg-[#fffff] overflow-auto mt-4 mb-4 rounded-lg'>
               <div className='flex flex-col gap-4'>
                 {jobList.map(job => (
@@ -153,7 +153,7 @@ export const Jobs = () => {
               )}
             </div>
             <Pagination
-              className='self-center '
+              className='self-center py-4'
               page={currentPage}
               onChange={(_, page) => setCurrentPage(page)}
               count={totalPageCount}
@@ -166,7 +166,7 @@ export const Jobs = () => {
                       color: '#f87171',
                     },
                     '& .Mui-selected': {
-                      backgroundColor: '#991b1b',
+                      backgroundColor: '#7A1515',
                       color: 'white',
                     },
                     '& .MuiPaginationItem-circle': {

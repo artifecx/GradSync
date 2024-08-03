@@ -70,9 +70,9 @@ export const DeleteAccount = () => {
                                     </div>
                                 </div>
                                 <div className='flex gap-2  '>
-                                    <div className='pt-1.5 cursor-pointer'><Checkbox className='cursor-pointer' onClick={()=>setConfirm(!confirm)} /></div>
+                                    <div className='pt-1 cursor-pointer'><Checkbox className='cursor-pointer' onClick={()=>setConfirm(!confirm)} /></div>
                                     <div>
-                                        Are you sure you can to delete your account.
+                                        Confirm Deletion
                                     </div>
                                 </div>
 
