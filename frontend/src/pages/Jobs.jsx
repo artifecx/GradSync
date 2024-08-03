@@ -4,12 +4,11 @@ import { FiSearch, FiFilter } from 'react-icons/fi';
 import { Loader } from '../components/Loader';
 import { JobCard } from '../components/JobCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllJobs, getSingleJob } from '../actions/JobActions';
+import { getAllJobs } from '../actions/JobActions';
 import { Modal, Slider } from '@mantine/core';
 import { RxCross2 } from 'react-icons/rx';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
-import { useTheme } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -77,7 +76,7 @@ export const Jobs = () => {
             <div className='bg-[#7A1515] min-w-screen py-8'>
               <div className='py-3 pt-4 w-full flex justify-center items-center'>
                 <div className='bg-white flex md:w-3/5 w-1/5 relative py-1.5 rounded-[7px]'>
-                  <div className='bg-white flex px-2 md:4/5 w-3/5'>
+                  <div className='bg-white flex px-2  w-full items-center'>
                     <FiSearch size={20} className='text-black ml-4' />
                     <input
                       value={search}
@@ -94,6 +93,7 @@ export const Jobs = () => {
                       <FiFilter size={20} className='text-black' />
                       <p className='text-black'>Filters</p>
                     </button>
+                    
                     {search && (
                       <RxCross2
                         size={19}
@@ -101,6 +101,7 @@ export const Jobs = () => {
                         className='text-black mr-2 cursor-pointer'
                       />
                     )}
+                   
                     </div>
                   </div>
                 </div>
@@ -141,10 +142,12 @@ export const Jobs = () => {
                 <button onClick={clearFilters} className='bg-gray-500 text-white p-2 mt-2'>Clear Filters</button>
               </div>
             </Modal>
-            <div className='self-center w-[60vw] bg-[#F3F3F3] overflow-auto mt-4 mb-4 rounded-lg'>
-              {jobList.map(job => (
-                <JobCard key={job.id} job={job} />
-              ))}
+            <div className='self-center w-[60vw] bg-[#fffff] overflow-auto mt-4 mb-4 rounded-lg'>
+              <div className='flex flex-col gap-4'>
+                {jobList.map(job => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
               {jobs.length === 0 && (
                 <div className='text-center'>No jobs found.</div>
               )}

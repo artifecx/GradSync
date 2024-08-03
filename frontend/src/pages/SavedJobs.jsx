@@ -35,14 +35,13 @@ export const SavedJobs = () => {
     <>
 
 <MetaData title="Saved Jobs" />
-      <div className='bg-[#F1F2F4] min-h-screen pt-14 md:px-20 px-3  text-[#7A1515]'>
+      <div className='bg-white min-h-screen pt-14 md:px-20 px-3  text-black'>
 
             {loading ? <Loader/> :
-              
               <div className='pt-6 md:px-28  px-1 pb-32' >
-                  {savedJobs.length !== 0 && <div className='text-center text-3xl pb-4 font-medium'>Saved Jobs</div>}
+                  {savedJobs.length !== 0 && <div className='self-center w-[60vw] text-left py-4 md:text-3xl text-2xl font-bold'>Saved Jobs</div>}
                 {
-                 <div className='flex flex-col gap-4'>
+                 <div className='Pt-6 flex flex-col gap-4'>
                    {savedJobs.slice().reverse().map((job,i)=>(
                     <SaveJobCard key={i} job={job}/>
                   ))}
