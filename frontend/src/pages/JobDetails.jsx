@@ -5,12 +5,6 @@ import { Loader } from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleJob, saveJob } from '../actions/JobActions';
 import { TbCurrencyPeso } from "react-icons/tb";
-import { AiOutlineSave } from 'react-icons/ai'
-import { HiStatusOnline } from 'react-icons/hi'
-import { BsPersonWorkspace, BsSend } from 'react-icons/bs'
-import { TbLoader2 } from 'react-icons/tb'
-import { useNavigate } from 'react-router'
-import {toast} from 'react-toastify'
 import { AiOutlineSave, AiOutlineBook } from 'react-icons/ai';
 import { HiStatusOnline } from 'react-icons/hi';
 import { BsPersonWorkspace, BsSend } from 'react-icons/bs';
@@ -89,7 +83,7 @@ export const JobDetails = () => {
 
   return (
     <>
-      <MetaData title="Listed Jobs" />
+      <MetaData title="Job Details" />
       <div className='bg-[#F5F6F8] min-h-screen pt-16 px-4 md:px-12 text-black'>
         {loading ? (
           <Loader />
