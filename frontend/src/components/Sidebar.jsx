@@ -6,12 +6,11 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
-
-export const Sidebar = ({sideTog}) => {
+export const Sidebar = ({ sideTog }) => {
 
     const sidebarVariants = {
         hidden: {
-            x: '-100%' ,
+            x: '-100%',
         },
         visible: {
             x: 0,
@@ -20,62 +19,54 @@ export const Sidebar = ({sideTog}) => {
 
     return (
         <>
-
-
-           
-
-          
             <motion.div
-            className={`${sideTog ? "flex" : "hidden"} flex-col bg-gray-950 min-h-screen md:w-72 w-64 shadow-lg shadow-gray-700 border-r border-gray-800 z-10 fixed left-0`}
-            variants={sidebarVariants}
-            initial="hidden"
-            animate={sideTog ? "visible" : "hidden"}
-            transition={{ duration: 0.1, ease: "easeIn" }}  
-        >
-
-                <div className='text-center w-full pt-8 text-xl '>
-                    {/* <p className='underline underline-offset-8'>Dashboard</p> */}
+                className={`${sideTog ? "flex" : "hidden"} flex-col bg-white shadow-md min-h-screen w-64 z-10 fixed left-0`}
+                variants={sidebarVariants}
+                initial="hidden"
+                animate={sideTog ? "visible" : "hidden"}
+                transition={{ duration: 0.1, ease: "easeIn" }}
+            >
+                <div className="pt-6 p-4 flex flex-col items-left text-[#6B6F73]">
+                    <p className="text-s">Menu</p>
+                    <ul className="w-full flex flex-col gap-4 pt-4">
+                        <li>
+                            <Link to="/admin/dashboard">
+                                <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
+                                    <MdOutlineDashboard size={20} /> Dashboard
+                                </button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/postJob">
+                                <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
+                                    <MdOutlineCreateNewFolder size={20} /> Post Job
+                                </button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/allJobs">
+                                <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
+                                    <BsBriefcase size={20} /> View All Jobs
+                                </button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/allApplications">
+                                <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
+                                    <MdOutlineFeaturedPlayList size={20} /> View All Applications
+                                </button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/allUsers">
+                                <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
+                                    <AiOutlineUser size={20} /> View All Users
+                                </button>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
-
-                <div className='flex justify-center  md:pl-12 pl-3 flex-col gap-14 items-start pt-20'>
-
-                    <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/dashboard" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'> <MdOutlineDashboard size={20} />Dashboard</Link>
-                    </div>
-
-                    <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/postJob" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'> <MdOutlineCreateNewFolder size={20} /> Post Job</Link>
-                    </div>
-
-                    <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/allJobs" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
-                            <BsBriefcase size={20} />View All Jobs
-                        </Link>
-                    </div>
-                    <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/allApplications" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
-                            <MdOutlineFeaturedPlayList size={20} />
-
-                            View All Applications </Link></div>
-
-                    <div className='flex justify-center gap-2 items-center'>
-
-                        <Link to="/admin/allUsers" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
-                            <AiOutlineUser size={20} />View All Users
-                        </Link>
-                    </div>
-
-                </div>
-                </motion.div>
-
-
-
+            </motion.div>
         </>
-
-
-
-
-
-
     )
 }

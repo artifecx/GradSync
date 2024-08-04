@@ -52,6 +52,8 @@ export const Navbar = () => {
                                 {me?.role !== "applicant" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
                                 {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
                                 {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
+                                {(me?.role !== "admin" && me?.role !== "applicant") && <Link to="/listings"><Menu.Item icon={<FaSave size={14} />}>Listed Jobs</Menu.Item></Link>}
+
                                 <Menu.Divider />
                                 <Menu.Item onClick={LogOut} color="red" icon={<RiLogoutBoxFill size={14} />}>Logout</Menu.Item>
                             </Menu.Dropdown>
@@ -81,6 +83,7 @@ export const Navbar = () => {
                                         {me?.role !== "applicant" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
                                         {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/applied"><Menu.Item icon={<MdDoneAll size={14} />}>Applied Jobs</Menu.Item></Link>}
                                         {(me?.role !== "admin" && me?.role !== "recruiter") && <Link to="/saved"><Menu.Item icon={<FaSave size={14} />}>Saved Jobs</Menu.Item></Link>}
+      
                                         <Menu.Divider />
                                         <Menu.Item onClick={LogOut} color="red" icon={<RiLogoutBoxFill size={14} />}>Logout</Menu.Item>
                                     </Menu.Dropdown>
