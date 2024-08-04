@@ -2,7 +2,13 @@ const User = require('../models/UserModel');
 const bcrypt = require('bcrypt')
 const { createToken } = require('../middlewares/auth')
 const cloudinary = require('cloudinary')
+const { calculateMatch } = require('../middlewares/matching');
 
+exports.calculateMatchPercentage = (req, res) => {
+    const { applicant, jobListing } = req.body;
+    const matchPercentage = calculateMatch(applicant, jobListing);
+    res.json({ matchPercentage });
+};
 
 exports.signUpRecruiter = async (req, res) => {
     try {
