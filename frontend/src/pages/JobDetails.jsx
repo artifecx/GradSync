@@ -4,9 +4,8 @@ import { MetaData } from '../components/MetaData';
 import { Loader } from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleJob, saveJob } from '../actions/JobActions';
-import { BiBriefcase, BiBuildings } from 'react-icons/bi';
 import { TbCurrencyPeso } from "react-icons/tb";
-import { AiOutlineSave } from 'react-icons/ai';
+import { AiOutlineSave, AiOutlineBook } from 'react-icons/ai';
 import { HiStatusOnline } from 'react-icons/hi';
 import { BsPersonWorkspace, BsSend } from 'react-icons/bs';
 import { TbLoader2 } from 'react-icons/tb';
@@ -43,7 +42,7 @@ export const JobDetails = () => {
         description: jobDetails.description
       };
 
-      const response = await axios.post('http://localhost:3000/api/v1/calculateMatch', { applicant, jobListing });
+      const response = await axios.post('https://gradsync-backend.vercel.app/api/v1/calculateMatch', { applicant, jobListing });
       setMatchPercentage(response.data.matchPercentage);
     } catch (error) {
       console.error('Error calculating match:', error);
@@ -69,6 +68,19 @@ export const JobDetails = () => {
 
   const capitalizeWords = (str) => str.replace(/\b\w/g, char => char.toUpperCase());
 
+  const getEmploymentTypeClass = (type) => {
+    switch (type.toLowerCase()) {
+      case 'full-time':
+        return 'bg-green-200 text-green-800';
+      case 'Part-time':
+        return 'bg-orange-200 text-orange-800';
+      case 'Contract':
+        return 'bg-yellow-200 text-yellow-800';
+      default:
+        return 'bg-gray-200 text-gray-800';
+    }
+  };
+
   return (
     <>
       <MetaData title="Job Details" />
@@ -78,90 +90,100 @@ export const JobDetails = () => {
         ) : (
           jobDetails && (
             <div className='container mx-auto bg-white rounded-lg shadow-lg p-6'>
-              <div className='flex flex-col md:flex-row items-center md:items-start'>
-                <div className='w-24 md:w-32 flex-shrink-0'>
-                  <img
-                    src={jobDetails.companyLogo.url}
-                    className='h-24 md:h-32 w-24 md:w-32 object-cover rounded-md'
-                    alt={jobDetails.companyName}
-                  />
-                </div>
-                <div className='md:ml-6 flex-1'>
-                  <h1 className='text-2xl md:text-3xl font-bold uppercase'>{jobDetails.title}</h1>
-                  <h2 className='text-lg md:text-xl font-semibold mt-2'>{jobDetails.companyName}</h2>
-                  <p className='text-sm md:text-md mt-2'>{capitalizeWords(jobDetails.employmentType)} | {jobDetails.location}</p>
-                  <p className='mt-2'>
-                    <span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} w-20 text-center rounded-lg font-semibold`}>
-                      {jobDetails.status}
+              <div className='flex flex-col md:flex-row items-center md:items-start justify-between'>
+                <div className='flex items-center'>
+                  <div className='w-24 md:w-32 flex-shrink-0'>
+                    <img
+                      src={jobDetails.companyLogo.url}
+                      className='h-24 md:h-32 w-24 md:w-32 object-cover rounded-md'
+                      alt={jobDetails.companyName}
+                    />
+                  </div>
+                  <div className='md:ml-6'>
+                    <h1 className='text-2xl md:text-3xl font-bold'>{jobDetails.title}</h1>
+                    <h2 className='text-lg md:text-xl font-semibold mt-2 pr-2'>at {jobDetails.companyName } &nbsp;
+                    <span className={`px-2 py-1 rounded ${ getEmploymentTypeClass (jobDetails.employmentType)}`}>
+                      {capitalizeWords(jobDetails.employmentType)}
                     </span>
-                  </p>
-                  {isLogin && matchPercentage !== null && (
+                    </h2>
+                    
+                    {isLogin && matchPercentage !== null && (
                     <p className='text-lg mt-2 text-blue-700'>
                       Match Percentage: {matchPercentage}%
                     </p>
                   )}
+                    
+                    <div className='mt-2'>
+                      <p className='text-sm md:text-md'>{jobDetails.location}</p>
+                      <p>
+                        <span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} w-20 text-center rounded-lg font-semibold`}>
+                          {jobDetails.status}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className='flex gap-4 mt-4 md:mt-0'>
+                  <button
+                    onClick={() => {
+                      if (isLogin) {
+                        saveJobHandler();
+                      } else {
+                        notLoginHandler("save");
+                      }
+                    }}
+                    className='hover:bg-blue-600 text-lg font-bold px-6 py-2 bg-blue-800 text-white flex items-center gap-1 rounded-md'
+                  >
+                    {saveJobLoading ? (
+                      <span className='animate-spin'>
+                        <TbLoader2 size={20} />
+                      </span>
+                    ) : (
+                      <AiOutlineBook />
+                    )}
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      if (isLogin) {
+                        if (me.appliedJobs && me.appliedJobs.includes(jobDetails._id)) {
+                          toast.error("You are already applied!");
+                        } else {
+                          navigate(`/Application/${jobDetails._id}`);
+                        }
+                      } else {
+                        notLoginHandler("apply");
+                      }
+                    }}
+                    className='hover:bg-green-600 text-lg font-bold px-6 py-2 bg-green-800 text-white flex items-center gap-1 rounded-md'
+                  >
+                    <BsSend /> {me.appliedJobs && me.appliedJobs.includes(jobDetails._id) ? "Applied" : "Apply"}
+                  </button>
                 </div>
               </div>
               <div className='border-b mt-4 mb-6'></div>
-              <div>
-                <h3 className='text-2xl font-bold mb-4'>Details:</h3>
-                <ul className='space-y-4'>
-                  <li className='flex items-center gap-3'><strong>Posted By:</strong> <div>{jobDetails.postedBy.name}</div></li>
-                  <li className='flex items-center gap-3'><strong>Posted At:</strong> <div>{convertDateFormat(jobDetails.createdAt.substr(0, 10))}</div></li>
-                  <li className='flex items-center gap-3'><strong>Location:</strong> <div>{jobDetails.location}</div></li>
-                  <li className='flex items-center gap-3'><strong>Salary:</strong> <div className='flex items-center'><TbCurrencyPeso /><span>{jobDetails.salary}</span></div></li>
-                  <li className='flex items-center gap-3'><strong>Experience:</strong> <div>{jobDetails.experience}</div></li>
-                  <li className='flex items-center gap-3'><strong>Skills Required:</strong>
-                    <div className='flex flex-wrap gap-2'>
-                      {jobDetails.skillsRequired.map((skill, i) => (
-                        <span key={i} className='px-2 py-0.5 bg-yellow-600 rounded text-black text-sm font-semibold'>{skill}</span>
-                      ))}
-                    </div>
-                  </li>
-                  <li className='mt-4'><strong className='text-2xl'>Job Description:</strong>
-                    <p className='mt-2 whitespace-pre-wrap'>{jobDetails.description}</p>
-                  </li>
-                </ul>
-              </div>
-              <div className='mt-6 flex gap-4'>
-                <button
-                  onClick={() => {
-                    if (isLogin) {
-                      if (me.appliedJobs && me.appliedJobs.includes(jobDetails._id)) {
-                        toast.error("You are already applied!");
-                      } else {
-                        navigate(`/Application/${jobDetails._id}`);
-                      }
-                    } else {
-                      notLoginHandler("apply");
-                    }
-                  }}
-                  className='hover:bg-green-600 text-lg font-bold px-6 py-2 bg-green-800 text-white flex items-center gap-1 rounded-md'
-                >
-                  <BsSend /> {me.appliedJobs && me.appliedJobs.includes(jobDetails._id) ? "Applied" : "Apply"}
-                </button>
-
-                <button
-                  onClick={() => {
-                    if (isLogin) {
-                      saveJobHandler();
-                    } else {
-                      notLoginHandler("save");
-                    }
-                  }}
-                  className='hover:bg-blue-600 text-lg font-bold px-6 py-2 bg-blue-800 text-white flex items-center gap-1 rounded-md'
-                >
-                  {saveJobLoading ? (
-                    <span className='animate-spin'>
-                      <TbLoader2 size={20} />
-                    </span>
-                  ) : (
-                    <>
-                      <AiOutlineSave />
-                      {me.savedJobs && me.savedJobs.includes(jobDetails._id) ? "UnSave" : "Save"}
-                    </>
-                  )}
-                </button>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                <div>
+                  <h3 className='text-2xl font-bold mb-4'>Job Description:</h3>
+                  <p className='whitespace-pre-wrap'>{jobDetails.description}</p>
+                </div>
+                <div>
+                  <h3 className='text-2xl font-bold mb-4'>Details:</h3>
+                  <ul className='space-y-4'>
+                    <li className='flex items-center gap-3'><strong>Posted By:</strong> <div>{jobDetails.postedBy.name}</div></li>
+                    <li className='flex items-center gap-3'><strong>Posted At:</strong> <div>{convertDateFormat(jobDetails.createdAt.substr(0, 10))}</div></li>
+                    <li className='flex items-center gap-3'><strong>Location:</strong> <div>{jobDetails.location}</div></li>
+                    <li className='flex items-center gap-3'><strong>Salary:</strong> <div className='flex items-center'><TbCurrencyPeso /><span>{jobDetails.salary}</span></div></li>
+                    <li className='flex items-center gap-3'><strong>Experience:</strong> <div>{jobDetails.experience}</div></li>
+                    <li className='flex items-center gap-3'><strong>Skills Required:</strong>
+                      <div className='flex flex-wrap gap-2'>
+                        {jobDetails.skillsRequired.map((skill, i) => (
+                          <span key={i} className='px-2 py-0.5 bg-yellow-600 rounded text-black text-sm font-semibold'>{skill}</span>
+                        ))}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           )
