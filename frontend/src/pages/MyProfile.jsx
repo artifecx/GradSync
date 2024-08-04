@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MetaData } from '../components/MetaData';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from '../components/Loader';
 import { Link } from 'react-router-dom';
+import { MdPermIdentity, MdOutlineFeaturedPlayList } from 'react-icons/md';
+import { AiOutlineMail } from 'react-icons/ai';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button, Group } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+import { Modal } from '@mantine/core';
 
 export const MyProfile = () => {
-  const { loading, me, isLogin } = useSelector((state) => state.user);
+  const { loading, me } = useSelector((state) => state.user);
   const [opened, { open, close }] = useDisclosure(false);
-
-  const navigate = useNavigate();
 
   const convertDateFormat = (inputDate) => {
     const parts = inputDate.split('-');
@@ -29,113 +27,118 @@ export const MyProfile = () => {
   return (
     <>
       <MetaData title="My Profile" />
-      <div className="bg-[#F1F2F4] min-h-screen pt-14 md:px-20 px-3 text-[#7A1515]">
-        {loading ? (
-          <Loader />
-        ) : (
+      <div className="bg-[#F1F2F4] min-h-screen pt-14 text-[#7A1515] flex">
           <>
-            <div className="text-left text-3xl absolute pl-4 underline-offset-8 md:pt-6 pt-3">
-              <span className="font-medium">{me.role !== 'recruiter' ? "My Profile" : "Company Profile"}</span>
+            {/* Sidebar */}
+            <div className="w-1/4 min-h-full bg-white shadow-md pt-6 p-4 flex flex-col items-left text-[#6B6F73]">
+              <p className="text-s">Menu</p>
+              <ul className="w-full flex flex-col gap-4 pt-4">
+                <li>
+                  <Link to="/profile">
+                    <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2">
+                      My Profile
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <button onClick={open} className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2">
+                    My Resume
+                  </button>
+                </li>
+                <li>
+                  <Link to="/applied">
+                    <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2">
+                      My Applications
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/changePassword">
+                    <button className="bg-gray-500 w-full text-white rounded-md font-semibold px-5 py-2">
+                      Change Password
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/deleteAccount">
+                    <button className="bg-red-500 w-full text-white rounded-md font-semibold px-5 py-2">
+                      Delete Account
+                    </button>
+                  </Link>
+                </li>
+              </ul>
             </div>
 
-            <div className="flex md:flex-row flex-col md:gap-12 justify-between items-top md:pt-12 border-blue-500 min-h-[90vh]">
-              {/* Profile Picture Section */}
-              <div className="md:w-1/3 w-full md:pb-0 pt-16 md:pt-10 gap-8 flex flex-col justify-start items-center">
-                <div className="w-72 h-72 flex md:justify-center justify-start items-center">
-                  <img src={me?.role === 'recruiter' ?  me?.companyLogo?.url : me?.avatar?.url} className="rounded-full w-full h-full" alt="" />
+            {/* Main Profile Dashboard */}
+            <div className="w-3/4 pl-10 flex flex-col py-6 pr-6 gap-6">
+            <p className='text-3xl font-semibold'>My Profile</p>
+
+              {/* Profile Picture and Edit Profile Button */}
+              <div className="bg-white shadow-md p-6 rounded-md flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-40 h-40 rounded-full border-8 border-white overflow-hidden mr-4">
+                    <img
+                      src={me?.role === 'recruiter' ? me?.companyLogo?.url : me?.avatar?.url}
+                      className="w-full h-full object-cover"
+                      alt="Profile"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center">
+                      <p className="text-xl font-semibold">{me.role !== 'recruiter' ? me.name : me.companyName}</p>
+                    </div>
+                    <div className="flex items-center mb-2">
+                      <p className="text-lg text-gray-600">{me.email}</p>
+                    </div>
+                    <div className="flex items-center">
+                      <p className="text-lg text-gray-500">Joined on {convertDateFormat(me.createdAt.substr(0, 10))}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-center items-center">
-                  <Link to="/editProfile" className="bg-[#7A1515] px-10 py-2 font-semibold text-white rounded-[5px]">
+                <div className="flex flex-col items-end">
+                  <Link to="/editProfile" className="bg-[#7A1515] px-5 py-2 font-semibold text-white rounded-md">
                     Edit Profile
                   </Link>
                 </div>
               </div>
 
-              {/* Profile Details Section */}
-              <div className="md:w-1/3 w-full md:px-0 px-4 pb-20 md:pt-4 pt-8">
-                <div className="flex flex-col md:gap-5 gap-6">
-                  <div>
-                    <p className="md:text-2xl text-xl text-black font-bold">{me.role !== 'recruiter' ? "Full Name" : "Company Name"}</p>
-                    <p className="md:text-xl pt-1 text-lg">{me.role !== 'recruiter' ? me.name : me.companyName}</p>
+              {/* Personal Information */}
+              <div className="bg-white shadow-md p-6 rounded-md">
+                <h2 className="text-2xl font-semibold mb-4">Personal Information</h2>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center">
+                    <MdPermIdentity className="text-gray-600 mr-2" size={20} />
+                    <p className="w-full px-3 py-2 border rounded-md">{me.role !== 'recruiter' ? me.name : me.companyName}</p>
                   </div>
-                  <div>
-                    <p className="md:text-2xl text-xl text-black font-bold">Email</p>
-                    <p className="md:text-xl pt-1 text-lg">{me.email}</p>
+                  <div className="flex items-center">
+                    <AiOutlineMail className="text-gray-600 mr-2" size={20} />
+                    <p className="w-full px-3 py-2 border rounded-md">{me.email}</p>
                   </div>
-                  <div>
-                    <p className="md:text-2xl text-xl text-black font-bold">Joined On</p>
-                    <p className="md:text-xl pt-1 text-lg">{convertDateFormat(me.createdAt.substr(0, 10))}</p>
-                  </div>
-                  {me.role === 'applicant' && (
-                    <div>
-                      <p className="md:text-2xl text-xl text-black font-bold">Skills</p>
-                      <div className="md:text-xl text-lg pt-3 flex gap-3 flex-wrap">
-                        {me.skills.map((skill, i) => (
-                          <span
-                            key={i}
-                            className="rounded-[3px] bg-white text-sm px-2 py-1 font-bold border"
-                            style={{ borderColor: '#7a1515' }}
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
 
-              {/* Buttons Section */}
-              <div className="md:w-1/3 w-full md:pt-4 pt-8">
-                <ul className="flex flex-col gap-4">
-                  {me.role === 'applicant' && (
-                    <>
-                      <li>
-                        <button onClick={open} className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
-                          My Resume
-                        </button>
-                      </li>
-                      <li>
-                        <Link to="/applied">
-                          <button className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
-                            My Applications
-                          </button>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/saved">
-                          <button className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
-                            Saved Jobs
-                          </button>
-                        </Link>
-                      </li>
-                    </>
-                  )}
-                  <li>
-                    <Link to="/changePassword">
-                      <button className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
-                        Change Password
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/deleteAccount">
-                      <button className="bg-[#7A1515] w-full text-white rounded-[5px] font-semibold px-5 py-1.5">
-                        Delete Account
-                      </button>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              {/* Skills */}
+              {me.role === 'applicant' && (
+                <div className="bg-white shadow-md p-6 rounded-md">
+                  <h2 className="text-2xl font-semibold mb-4">Skills</h2>
+                  <div className="flex gap-2 flex-wrap">
+                    {me.skills.map((skill, i) => (
+                      <span key={i} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-
+            
+            {/* Resume Modal */}
             <Modal opened={opened} onClose={close} title="Resume">
               <div>
-                <img src={me?.resume?.url} className="w-full h-full" alt="" />
+                <img src={me?.resume?.url} className="w-full h-full object-contain" alt="Resume" />
               </div>
             </Modal>
           </>
-        )}
       </div>
     </>
   );
