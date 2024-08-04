@@ -3,23 +3,33 @@ const User = require('../models/UserModel')
 const Application = require('../models/AppModel')
 const cloudinary = require('cloudinary')
 
-
 // Get all jobs
 exports.getAllJobs = async (req,res) => {
-    try{
-        const jobs = await Job.find() ;
+    const userId = req.user.id;
+    console.log(userId);
+    try {
+        const user = await User.findById(userId);
+
+        let jobs;
+        if (user.role === 'recruiter') {
+            jobs = await Job.find({ postedBy: userId });
+        } else if(user.role === 'admin'){
+            jobs = await Job.find();
+        } else {
+            return res.status(403).json({ success: false, message: 'Only recruiters and admins can view their job listings' });
+        }
 
         res.status(200).json({
             success: true,
             jobs
-        })
+        });
 
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: err.message
-        })
-    }                
+        });
+    }               
 }
 
 // Get all Users
@@ -41,20 +51,33 @@ exports.getAllUsers = async (req,res) => {
 }
 
 // Get all applications
-exports.getAllApp = async (req,res) => {
-    try{
-        const applications = await Application.find().populate("job applicant") ;
+exports.getAllApp = async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const user = await User.findById(userId);
+
+        let applications;
+        if (user.role === 'recruiter') {
+            const jobsPostedByRecruiter = await Job.find({ postedBy: userId }).select('_id');
+            const jobIds = jobsPostedByRecruiter.map(job => job._id);
+            applications = await Application.find({ job: { $in: jobIds } }).populate("job applicant");
+        } else if (user.role === 'admin') {
+            applications = await Application.find().populate("job applicant");
+        } else {
+            return res.status(403).json({ success: false, message: 'Only recruiters and admins can view applications' });
+        }
 
         res.status(200).json({
             success: true,
             applications
-        })
+        });
 
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: err.message
-        })
+        });
     }
 }
 
