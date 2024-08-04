@@ -25,7 +25,7 @@ export const Footer = () => {
         <div>
           <div className='flex flex-col justify-center items-center pt-5'>
             <p className='titleT text-2xl flex justify-center items-center'> <img src={logoBW} alt="Logo" className="h-8 mr-3" /></p>
-            <p className='text-sm text-gray-300'>Giving best opportunities to best peoples.</p>
+            <p className='text-sm text-gray-300'>Giving best opportunities to best people</p>
           </div>
 
           <div className='flex gap-5 py-2 justify-center items-center'>
