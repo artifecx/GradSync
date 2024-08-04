@@ -13,7 +13,7 @@ import { TbLoader2 } from 'react-icons/tb'
 import { useNavigate } from 'react-router'
 import {toast} from 'react-toastify'
 
-export const JobDetails = () => {
+export const JobListing = () => {
   const dispatch = useDispatch();
   const { jobDetails, loading, saveJobLoading } = useSelector(state => state.job);
   const { me, isLogin } = useSelector(state => state.user);
@@ -45,7 +45,7 @@ export const JobDetails = () => {
 
   return (
     <>
-      <MetaData title="Listed Jobs" />
+      <MetaData title="Job Details" />
       <div className='bg-[#F5F6F8] min-h-screen pt-16 px-4 md:px-12 text-black'>
         {loading ? (
           <Loader />
