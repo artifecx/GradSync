@@ -12,6 +12,7 @@ import { BsPersonWorkspace, BsSend } from 'react-icons/bs';
 import { TbLoader2 } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export const JobDetails = () => {
   const dispatch = useDispatch();
@@ -19,10 +20,35 @@ export const JobDetails = () => {
   const { me, isLogin } = useSelector(state => state.user);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [matchPercentage, setMatchPercentage] = useState(null);
 
   useEffect(() => {
     dispatch(getSingleJob(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (jobDetails && me) {
+      calculateMatch();
+    }
+  }, [jobDetails, me]);
+
+  const calculateMatch = async () => {
+    try {
+      const applicant = {
+        skills: me.skills
+      };
+
+      const jobListing = {
+        skills: jobDetails.skillsRequired,
+        description: jobDetails.description
+      };
+
+      const response = await axios.post('http://localhost:3000/api/v1/calculateMatch', { applicant, jobListing });
+      setMatchPercentage(response.data.matchPercentage);
+    } catch (error) {
+      console.error('Error calculating match:', error);
+    }
+  };
 
   const convertDateFormat = (inputDate) => {
     const parts = inputDate.split('-');
@@ -69,6 +95,11 @@ export const JobDetails = () => {
                       {jobDetails.status}
                     </span>
                   </p>
+                  {isLogin && matchPercentage !== null && (
+                    <p className='text-lg mt-2 text-blue-700'>
+                      Match Percentage: {matchPercentage}%
+                    </p>
+                  )}
                 </div>
               </div>
               <div className='border-b mt-4 mb-6'></div>
