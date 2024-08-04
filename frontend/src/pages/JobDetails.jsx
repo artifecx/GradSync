@@ -83,7 +83,7 @@ export const JobDetails = () => {
 
   return (
     <>
-      <MetaData title="Job Details" />
+      <MetaData title="Listed Jobs" />
       <div className='bg-[#F5F6F8] min-h-screen pt-16 px-4 md:px-12 text-black'>
         {loading ? (
           <Loader />
