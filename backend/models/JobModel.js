@@ -45,7 +45,21 @@ const jobSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    companyName: {
+        type: String,
+        required: true
+    },
+    companyLogo: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        },
+    },
 });
 
 module.exports = mongoose.model('Job', jobSchema);

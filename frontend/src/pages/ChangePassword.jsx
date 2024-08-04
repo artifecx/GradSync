@@ -37,7 +37,7 @@ export const ChangePassword = () => {
   return (
     <>
       <MetaData title="Change Password" />
-      <div className="bg-cover bg-center min-h-screen pt-14 md:px-20 px-3 text-white" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <div className="bg-cover bg-center min-h-screen md:px-20 px-3 text-white" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="min-h-screen pt-14 md:px-md text-[#7A1515] flex items-center justify-left w-full bg-opacity-0]">
           <form onSubmit={changeHandler} className="flex flex-col md:w-1/3 w-full md:mx-0 mx-4" style={{ maxWidth: '500px' }}>
             <div className="md:px-10  px-5 py-6 w-full flex flex-col gap-4">

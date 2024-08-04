@@ -82,12 +82,15 @@ const { loading, me } = useSelector(state => state.user)
     }
 
 
-    useEffect(()=>{
-        dispatch(ME())
-        setName(me.name)
-        setEmail(me.email)
-        setSkills(me.skills)
-    },[dispatch])
+    useEffect(() => {
+        if (!me) {
+            dispatch(ME());
+        } else {
+            setName(me.name);
+            setEmail(me.email);
+            setSkills(me.skills);
+        }
+    }, [dispatch, me]);
 
     return (
         <>

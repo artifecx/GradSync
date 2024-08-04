@@ -106,7 +106,7 @@ export const Navbar = () => {
                 <div className={` ${toggle ? "flex" : "hidden"} absolute w-screen h-screen z-20 md:hidden`}>
                     <ul className='bg-white bg-opacity-95 flex flex-col gap-20 text-2xl justify-start w-screen pt-20 items-center'>
                         <Link onClick={() => setToggle(!toggle)} to="/" className='cool-link'>Home</Link>
-                        <Link onClick={() => setToggle(!toggle)} to="/jobs" className='cool-link'>Jobs</Link>
+                        {(me?.role !== "admin" && me?.role !== "recruiter") &&<Link onClick={() => setToggle(!toggle)} to="/jobs" className='cool-link'>Jobs</Link>}
                         <Link onClick={() => setToggle(!toggle)} to='/contact' className='cool-link'>Contact</Link>
                         <Link onClick={() => setToggle(!toggle)} to='/about' className='cool-link'>About</Link>
                     </ul>

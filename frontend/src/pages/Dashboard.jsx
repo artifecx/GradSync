@@ -22,12 +22,6 @@ export const Dashboard = () => {
     dispatch(getAllAppAdmin());
   }, []);
 
-
-
-
-
-
-
   return (
     <>
 
@@ -68,24 +62,20 @@ export const Dashboard = () => {
               <div className='text-8xl '><CountUp start={0} end={allApplications && allApplications.length} /></div>
               <p className='text-2xl'>Applications</p>
             </div>
-
-
           </div>
 
-        <div className='w-full  flex justify-center items-center pb-28'>
-          <div className='w-[27rem] md:px-0 px-6 h-[27rem]'>
+          <div className='w-full  flex justify-center items-center pb-28'>
+            <div className='w-[27rem] md:px-0 px-6 h-[27rem]'>
 
-          <BarChart applications={allApplications && allApplications.length} users={allUsers && allUsers.length} jobs={allJobs && allJobs.length} />
+            <BarChart applications={allApplications && allApplications.length} users={allUsers && allUsers.length} jobs={allJobs && allJobs.length} />
+            </div>
           </div>
-        </div>
         
         </>
 
           }
 
         </div>
-
-
       </div>
 
 

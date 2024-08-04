@@ -4,7 +4,6 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbLoader2 } from 'react-icons/tb';
 import { registerRecruiter } from '../actions/UserActions'; // Updated import
-import { registerRecruiter } from '../actions/UserActions'; // Updated import
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import backgroundImage from "../assets/loginBG.png";
@@ -16,15 +15,16 @@ export const RegisterRecruiter = () => {
 
   const [eyeTog, setEyeTog] = useState(false);
 
-  const [recruiterName, setRecruiterName] = useState(""); // Changed to recruiterName
+  const [recruiterName, setRecruiterName] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [companyLogo, setCompanyLogo] = useState(""); // Changed to companyLogo
-  const [companyLogoName, setCompanyLogoName] = useState(""); // Changed to companyLogoName
 
-  const companyLogoChange = (e) => { // Changed to companyLogoChange
-    if (e.target.name === "companyLogo") { // Changed to companyLogo
+  const [companyLogo, setCompanyLogo] = useState("");
+  const [companyLogoName, setCompanyLogoName] = useState("");
+
+  const companyLogoChange = (e) => {
+    if (e.target.name === "companyLogo") {
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.readyState === 2) {
@@ -41,10 +41,7 @@ export const RegisterRecruiter = () => {
     e.preventDefault();
 
     const data = {
-      name: recruiterName, // Changed to recruiterName
-      password,
-      companyName,
-      name: recruiterName, // Changed to recruiterName
+      name: recruiterName,
       companyName,
       email,
       password,
@@ -52,14 +49,7 @@ export const RegisterRecruiter = () => {
       role: "recruiter",
     };
 
-    dispatch(registerRecruiter(data)); // Changed to registerRecruiter
-
-    setRecruiterName(""); // Changed to setRecruiterName
-    setCompanyName("");
-    setEmail("");
-    setPassword("");
-    setCompanyLogo("");
-    setCompanyLogoName("");
+    dispatch(registerRecruiter(data));
   };
 
   useEffect(() => {
@@ -246,7 +236,5 @@ export const RegisterRecruiter = () => {
     </>
   );
 };
-
-export default RegisterRecruiter;
 
 export default RegisterRecruiter;

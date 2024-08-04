@@ -6,7 +6,7 @@ import { TbLoader2 } from 'react-icons/tb'
 import { deleteAccount } from '../actions/UserActions'
 import { Checkbox } from '@mantine/core';
 import { useNavigate } from 'react-router'
-
+import backgroundImage from "../assets/loginBG.png";
 
 export const DeleteAccount = () => {
 
@@ -43,7 +43,7 @@ export const DeleteAccount = () => {
     return (
         <>
 
-            <MetaData title="Change Password" />
+            <MetaData title="Delete Password" />
             <div className='bg-[#F1F2F4] min-h-screen pt-14  md:px-20 px-3  text-[#7A1515]'>
 
 
@@ -70,9 +70,9 @@ export const DeleteAccount = () => {
                                     </div>
                                 </div>
                                 <div className='flex gap-2  '>
-                                    <div className='pt-1.5 cursor-pointer'><Checkbox className='cursor-pointer' onClick={()=>setConfirm(!confirm)} /></div>
+                                    <div className='pt-1 cursor-pointer'><Checkbox className='cursor-pointer' onClick={()=>setConfirm(!confirm)} /></div>
                                     <div>
-                                        Are you sure you can to delete your account.
+                                        Confirm Deletion
                                     </div>
                                 </div>
 
