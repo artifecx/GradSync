@@ -134,12 +134,7 @@ function App() {
         className="mt-14 font-bold  "
 
       />
-
       <Footer />
-
-
-
-
     </>
   )
 }
