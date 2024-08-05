@@ -49,85 +49,98 @@ export const ViewAllJobAdmin = () => {
   return (
     <>
       <MetaData title="All Jobs" />
-      <div className='bg-gray-950 min-h-screen pt-14 md:px-20 px-3 text-white'>
-        {loading ? <Loader /> : (
-          <div>
-            <div className="pt-1 fixed left-0 z-20 pl-0">
-              <div onClick={() => setSideTog(!sideTog)} className='cursor-pointer blueCol px-3 py-2'>
-                {!sideTog ? "Menu" : <RxCross1 />}
-              </div>
-            </div>
-            <Sidebar sideTog={sideTog} />
-            <div className='text-center pt-3 pb-4 text-3xl font-medium'>All Jobs</div>
-            <div className='flex justify-center'>
-              <div className='bg-white flex w-full md:w-3/5 relative py-1.5 rounded-[7px]'>
-                <div className='bg-white flex px-2 w-full items-center'>
-                  <FiSearch size={20} className='text-black ml-4' />
-                  <input
-                    value={search}
-                    onChange={(e) => searchHandler(e.target.value)}
-                    type="text"
-                    className='outline-none text-black w-full px-2 py-1'
-                    placeholder='Search by job title, position, keyword...'
-                  />
-                  {search && (
-                    <RxCross2
-                      size={19}
-                      onClick={() => setSearch('')}
-                      className='text-black mr-2 cursor-pointer'
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="relative pb-24 overflow-x-auto shadow-md mt-4">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-200 uppercase blueCol dark:text-gray-200">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">Job Id</th>
-                    <th scope="col" className="px-6 py-3">Job Name</th>
-                    <th scope="col" className="px-6 py-3">Company</th>
-                    <th scope="col" className="px-6 py-3">Location</th>
-                    <th scope="col" className="px-6 py-3">Posted On</th>
-                    <th scope="col" className="px-6 py-3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {jobList.map(job => (
-                    <AdminJobCard key={job._id} job={job} onDelete={deleteJobHandler} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <Pagination
-              className='self-center py-4'
-              page={currentPage}
-              onChange={(_, page) => setCurrentPage(page)}
-              count={totalPageCount}
-              renderItem={(item) => (
-                <PaginationItem
-                  components={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                  {...item}
-                  sx={{
-                    '& .MuiPaginationItem-root': {
-                      color: '#f87171',
-                    },
-                    '& .Mui-selected': {
-                      backgroundColor: '#7A1515',
-                      color: 'white',
-                    },
-                    '& .MuiPaginationItem-circle': {
-                      borderRadius: '50%',
-                    },
-                    '& .MuiPaginationItem-ellipsis': {
-                      color: 'white',
-                    },
-                  }}
-                />
-              )}
-            />
+      <div className="bg-[#F1F2F4] min-h-screen pt-14 flex relative">
+        {/* Sidebar */}
+        <div className={`transition-transform duration-300 ${sideTog ? 'translate-x-0' : '-translate-x-full'} fixed top-0 left-0 h-full w-64 bg-white shadow-md z-40`}>
+          <div
+            onClick={() => setSideTog(false)}
+            className="absolute top-4 right-4 text-xl cursor-pointer text-gray-600"
+          >
+            <RxCross1 />
           </div>
-        )}
+          <Sidebar sideTog={sideTog} />
+        </div>
+        <div className={`flex-1 pl-6 pr-4 py-4 ${sideTog ? 'ml-64' : ''}`}>
+          <div className="flex justify-between items-center mb-4">
+            <div
+              onClick={() => setSideTog(!sideTog)}
+              className="cursor-pointer bg-[#7A1515] text-white px-4 py-2 rounded-md"
+            >
+              {!sideTog ? "Menu" : <RxCross1 />}
+            </div>
+            <div className="text-3xl font-semibold text-[#7A1515]">All Jobs</div>
+            <div className="w-1/2 md:w-1/3 relative">
+              <div className="bg-white flex items-center rounded-md shadow-md">
+                <FiSearch size={20} className="text-gray-500 ml-4" />
+                <input
+                  value={search}
+                  onChange={(e) => searchHandler(e.target.value)}
+                  type="text"
+                  className="outline-none text-gray-700 w-full px-2 py-1"
+                  placeholder="Search by job title, position, keyword..."
+                />
+                {search && (
+                  <RxCross2
+                    size={19}
+                    onClick={() => setSearch('')}
+                    className="text-gray-500 mr-2 cursor-pointer"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+
+          {loading ? <Loader /> : (
+            <>
+              <div className="bg-white shadow-md rounded-md overflow-x-auto">
+                <table className="w-full text-sm text-gray-600">
+                  <thead className="text-xs text-[#7A1515] uppercase bg-gray-100">
+                    <tr>
+                      <th className="px-6 py-3">Job Id</th>
+                      <th className="px-6 py-3">Job Name</th>
+                      <th className="px-6 py-3">Company</th>
+                      <th className="px-6 py-3">Location</th>
+                      <th className="px-6 py-3">Posted On</th>
+                      <th className="px-6 py-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {jobList.map(job => (
+                      <AdminJobCard key={job._id} job={job} onDelete={deleteJobHandler} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <Pagination
+                className="mt-4"
+                page={currentPage}
+                onChange={(_, page) => setCurrentPage(page)}
+                count={totalPageCount}
+                renderItem={(item) => (
+                  <PaginationItem
+                    components={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                    {...item}
+                    sx={{
+                      '& .MuiPaginationItem-root': {
+                        color: '#7A1515',
+                      },
+                      '& .Mui-selected': {
+                        backgroundColor: '#7A1515',
+                        color: 'white',
+                      },
+                      '& .MuiPaginationItem-circle': {
+                        borderRadius: '50%',
+                      },
+                      '& .MuiPaginationItem-ellipsis': {
+                        color: '#7A1515',
+                      },
+                    }}
+                  />
+                )}
+              />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
