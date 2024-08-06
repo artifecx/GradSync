@@ -61,7 +61,7 @@ export const SaveJobCard = ({ job }) => {
 
             <div className="flex items-center mb-4 mt-2 pl-4">
                             <Link to={`/details/${job._id}`} className="text-xs font-semibold mr-2 bg-white hover:bg-yellow-500 text-[#7A1515] py-2 px-4 rounded-sm w-max">Apply</Link>
-                            <button onClick={unSaveJobHandler} className="text-xs font-semibold bg-[#7A1515] hover:bg-red-700 text-white py-2 px-4 rounded-sm w-max">UnSave</button>
+                            <button onClick={unSaveJobHandler} className="text-xs font-semibold bg-[#7A1515] hover:bg-red-700 text-white py-2 px-4 rounded-sm w-max">Unsave</button>
             </div>  
                 {/* <div className="text-xs text-gray-600">Posted: {convertDateFormat(job.createdAt.substr(0, 10))}</div> */}
         </div>
