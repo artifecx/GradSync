@@ -67,6 +67,7 @@ exports.register = async (req, res) => {
         })
 
         const hashPass = await bcrypt.hash(password, 10)
+        const skillsArr = skills;
         const user = await User.create({
             name,
             email,
@@ -75,7 +76,7 @@ exports.register = async (req, res) => {
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url
             },
-            skills,
+            skills: skillsArr,
             resume: {
                 public_id: myCloud2.public_id,
                 url: myCloud2.secure_url

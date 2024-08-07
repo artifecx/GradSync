@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
         enum: ['admin', 'recruiter', 'applicant'],
         required: true
     },
+    skills: [
+        {
+            type: String
+        }
+    ],
     avatar: {
         public_id: {
             type: String,
