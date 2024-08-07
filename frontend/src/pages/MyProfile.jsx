@@ -121,7 +121,7 @@ export const MyProfile = () => {
             <div className="bg-white shadow-md p-6 rounded-md">
               <h2 className="text-2xl font-semibold mb-4">Skills</h2>
               <div className="flex gap-2 flex-wrap">
-                {me.skills.map((skill, i) => (
+                {me.skills?.map((skill, i) => (
                   <span key={i} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
                     {skill}
                   </span>

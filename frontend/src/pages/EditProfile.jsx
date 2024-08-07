@@ -68,7 +68,7 @@ export const EditProfile = () => {
     } else {
       setName(me.name);
       setEmail(me.email);
-      setSkills(me.skills.join(', '));
+      setSkills(me.skills?.join(', '));
     }
   }, [dispatch, me]);
 
