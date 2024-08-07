@@ -113,7 +113,7 @@ export const Home = () => {
                             Discover jobs that suit your <span className="text-[#7A1515]">interest & skills</span> today!
                         </h1>
                         <p className="text-gray-600 leading-relaxed mb-6">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo perferendis dignissimos eligendi voluptas exercitationem, eius aut mollitia quasi nisi voluptatem similique, tempore totam, odit repellendus non. Dolores eos animi recusandae.
+                        Unlock your potential with our job matching website. We connect you with opportunities that align with your expertise and passions, making the job search process simple and efficient. Whether you're looking for a new career path or a step up in your current field, we are here to help you find the perfect match. Start your journey with us and find the job that fits you best.
                         </p>
                         <div className="btn-grp">
                             <Link className="btn bg-[#7A1515] hover:[#A53D3D] text-white font-semibold py-2 px-4 rounded inline-block" to="/jobs">
