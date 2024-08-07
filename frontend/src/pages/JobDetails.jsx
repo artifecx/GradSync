@@ -119,7 +119,7 @@ export const JobDetails = () => {
                     
                     {isLogin && matchPercentage !== null && (
                     <p className='text-lg font-semibold text-[#7A1515]'>
-                      Match Percentage: {matchPercentage}%
+                      Match Percentage: {Math.round(matchPercentage)}%
                     </p>
                   )}
                   </div>
