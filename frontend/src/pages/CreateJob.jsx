@@ -34,12 +34,12 @@ export const CreateJob = () => {
   return (
     <>
       <MetaData title="Post Job" />
-      <div className='bg-white min-h-screen pt-12 flex relative'>
+      <div className='bg-white min-h-screen pt-14 flex relative'>
         {/* Sidebar */}
-        <div className={`transition-transform duration-300 ${sideTog ? 'translate-x-0' : '-translate-x-full'} fixed top-0 left-0 h-full w-64 bg-white shadow-md z-30`}>
+        <div className={`transition-transform duration-300 ${sideTog ? 'translate-x-0' : '-translate-x-full'} fixed top-0 left-0 h-full w-64 bg-white shadow-md z-40`}>
           <div
             onClick={() => setSideTog(false)}
-            className="absolute top-4 right-4 text-xl cursor-pointer text-gray-600 z-40"
+            className="absolute top-4 right-4 text-xl cursor-pointer text-gray-600"
           >
             <RxCross1 />
           </div>
