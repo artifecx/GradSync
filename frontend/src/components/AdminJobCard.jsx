@@ -18,15 +18,13 @@ export const AdminJobCard = ({ job, onDelete }) => {
   };
 
   return (
-    <tr className="border-b hover:bg-gray-900 bg-gray-950 border-gray-700 text-white">
-      <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-        {job._id}
-      </th>
+    <tr className="text-center border-b hover:bg-gray-900 bg-gray-950 border-gray-700 text-white">
+      <td className="px-6 py-4 font-medium whitespace-nowrap">{job._id}</td>
       <td className="px-6 py-4">{job.title}</td>
-      <td className="px-6 py-4">{job.postedBy.companyName}</td>
+      <td className="px-6 py-4">{job.companyName}</td>
       <td className="px-6 py-4">{job.location}</td>
       <td className="px-6 py-4">{convertDateFormat(job.createdAt.substr(0, 10))}</td>
-      <td className="px-6 flex gap-4 py-4">
+      <td className="px-6 py-4 flex gap-4">
         <Link to={`/admin/job/details/${job._id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer'>
           <MdOutlineModeEditOutline size={20} />
         </Link>

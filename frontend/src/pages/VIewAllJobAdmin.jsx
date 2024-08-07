@@ -96,14 +96,18 @@ export const ViewAllJobAdmin = () => {
                 <table className="w-full text-sm text-gray-600">
                   <thead className="text-xs text-[#7A1515] uppercase bg-gray-100">
                     <tr>
-                      <th className="px-6 py-3">Job Id</th>
-                      <th className="px-6 py-3">Job Name</th>
-                      <th className="px-6 py-3">Company</th>
-                      <th className="px-6 py-3">Location</th>
-                      <th className="px-6 py-3">Posted On</th>
-                      <th className="px-6 py-3">Action</th>
+                      <th className="px-6 py-3 w-1/6">Job Id</th>
+                      <th className="px-6 py-3 w-1/4">Job Name</th>
+                      <th className="px-6 py-3 w-1/4">Company</th>
+                      <th className="px-6 py-3 w-1/6">Location</th>
+                      <th className="px-6 py-3 w-1/6">Posted On</th>
+                      <th className="px-6 py-3 w-1/6">Action</th>
                     </tr>
                   </thead>
+                {/* </table> */}
+              {/* </div> */}
+              {/* <div className="bg-white shadow-md rounded-md overflow-x-auto">
+                <table className="w-full text-sm text-gray-600"> */}
                   <tbody>
                     {jobList.map(job => (
                       <AdminJobCard key={job._id} job={job} onDelete={deleteJobHandler} />

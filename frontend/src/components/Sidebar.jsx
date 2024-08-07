@@ -53,7 +53,7 @@ export const Sidebar = ({ sideTog }) => {
                         <li>
                             <Link to="/admin/allApplications">
                                 <button className="bg-[#7A1515] w-full text-white rounded-md font-semibold px-5 py-2 flex items-center gap-2">
-                                    <MdOutlineFeaturedPlayList size={20} /> View All Applications
+                                    <MdOutlineFeaturedPlayList size={20} /> View Applicants
                                 </button>
                             </Link>
                         </li>
